@@ -1,10 +1,11 @@
-package pl.coderstrust;
+package pl.coderstrust.foobar;
 
 public class FooBar {
     public static void main(String[] args) {
         int number = 100;
         printFooBar(number);
     }
+
     public static void printFooBar(int number) {
         for (int i = 0; i <=number + 1; i++) {
             System.out.print(i + " ");
