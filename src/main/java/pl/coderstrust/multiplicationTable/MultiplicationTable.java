@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class MultiplicationTable {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
-        System.out.println("Podaj wymiar tablicy: ");
+        System.out.println("Podaj wymiar tablicy:");
         int size = scan.nextInt();
         printMultiplicationTable(size);
     }
