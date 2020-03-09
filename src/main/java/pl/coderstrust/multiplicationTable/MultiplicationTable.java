@@ -11,7 +11,7 @@ public class MultiplicationTable {
     }
 
     public static void printMultiplicationTable(int size) {
-        System.out.format("    ");
+        System.out.format("%4s","");
         for (int i = 1; i <= size; i++) {
             System.out.format("%4d", i);
         }
