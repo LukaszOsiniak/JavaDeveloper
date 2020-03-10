@@ -1,4 +1,4 @@
-package pl.coderstrust.christmasTree;
+package pl.coderstrust.christmastree;
 
 import java.util.Scanner;
 
@@ -15,7 +15,7 @@ public class ChristmasTree {
             for (int j = 0; j < size - i; j++) {
                 System.out.print(" ");
             }
-            for (int k = 0; k < (i * 2 - 1); k++) {
+            for (int j = 0; j < (i * 2 - 1); j++) {
                 System.out.print("*");
             }
             System.out.println();
