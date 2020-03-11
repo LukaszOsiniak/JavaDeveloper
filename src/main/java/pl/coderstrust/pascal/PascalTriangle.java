@@ -3,7 +3,6 @@ package pl.coderstrust.pascal;
 import java.util.Scanner;
 
 public class PascalTriangle {
-
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         System.out.println("Podaj liczbę poziomów:");
