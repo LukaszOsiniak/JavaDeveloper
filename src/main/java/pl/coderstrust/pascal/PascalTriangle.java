@@ -1,8 +1,18 @@
 package pl.coderstrust.pascal;
 
+import java.util.Scanner;
+
 public class PascalTriangle {
+
     public static void main(String[] args) {
-        int levels = 5;
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Podaj liczbę poziomów:");
+        String levels = scan.nextLine();
+
+        System.out.println(pascalTriangle(););
+    }
+
+    public static void pascalTriangle() {
         for (int i = 0; i < levels; i++) {
             for (int j = 0; j < (levels - i - 1); j++) {
                 System.out.printf("%2s", "");
