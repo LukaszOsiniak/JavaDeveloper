@@ -7,12 +7,12 @@ public class PascalTriangle {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         System.out.println("Podaj liczbę poziomów:");
-        String levels = scan.nextLine();
+        int levels = scan.nextInt();
 
-        System.out.println(pascalTriangle(););
+        printpascalTriangle(levels);
     }
 
-    public static void pascalTriangle() {
+    public static void printpascalTriangle(int levels) {
         for (int i = 0; i < levels; i++) {
             for (int j = 0; j < (levels - i - 1); j++) {
                 System.out.printf("%2s", "");
@@ -36,5 +36,3 @@ public class PascalTriangle {
         return result;
     }
 }
-
-
