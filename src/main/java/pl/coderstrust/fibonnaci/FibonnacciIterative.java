@@ -10,13 +10,15 @@ public class FibonnacciIterative {
         System.out.println(fibonacci(fibonacciNumberInOrder));
     }
 
-    private static long fibonacci(long fibonacciNumberInOrder) {
-        int a = 0, b = 1, next = 1;
+    public static long fibonacci(long fibonacciNumberInOrder) {
+        int temp = 0;
+        int previousValue = 1;
+        int actualValue = 1;
         for (int i = 2; i <= fibonacciNumberInOrder; i++) {
-            next = a + b;
-            a = b;
-            b = next;
+            actualValue = temp + previousValue;
+            temp = previousValue;
+            previousValue = actualValue;
         }
-        return next;
+        return actualValue;
     }
 }

@@ -10,10 +10,12 @@ public class FibonacciRecursive {
         System.out.println(fibonacci(fibonacciNumberInOrder));
     }
 
-    private static long fibonacci(long fibonacciNumberInOrder) {
-        if (fibonacciNumberInOrder == 1 || fibonacciNumberInOrder == 2) {
-            return 1;
+    public static long fibonacci(long fibonacciNumberInOrder) {
+        if (fibonacciNumberInOrder < 0){
+            throw IllegalArgumentException
         }
-        return fibonacci(fibonacciNumberInOrder - 1) + fibonacci(fibonacciNumberInOrder - 2);
+        if (fibonacciNumberInOrder <= 1) {
+        }
+        return fibonacciNumberInOrder;
     }
 }
