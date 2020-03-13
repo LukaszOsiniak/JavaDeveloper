@@ -12,10 +12,11 @@ public class FibonacciRecursive {
 
     public static long fibonacci(long fibonacciNumberInOrder) {
         if (fibonacciNumberInOrder < 0){
-            throw IllegalArgumentException
+            throw new IllegalArgumentException("Fibonacci number cannot be lower than zero");
         }
         if (fibonacciNumberInOrder <= 1) {
+            return fibonacciNumberInOrder;
         }
-        return fibonacciNumberInOrder;
+        return fibonacci(fibonacciNumberInOrder - 1) + fibonacci(fibonacciNumberInOrder - 2);
     }
 }
