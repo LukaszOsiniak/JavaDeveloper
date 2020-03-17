@@ -1,4 +1,4 @@
-package pl.coderstrust.letsSortTogether;
+package pl.coderstrust.sort;
 
 import java.util.Arrays;
 
@@ -12,7 +12,7 @@ public class SelectionSort {
 
     public static int[] sort(int[] array) {
         if (array == null) {
-            throw new IllegalArgumentException("Array cannot be empty");
+            throw new IllegalArgumentException("Array cannot be null");
         }
         int[] sortedArray = new int[array.length];
         for (int i = 0; i < array.length; i++) {
@@ -24,14 +24,14 @@ public class SelectionSort {
         return sortedArray;
     }
 
-    public static int findMaximumIndex(int[] array, int start) {
-        int indexOfCurrentMaximumValue = start;
-        for (int i = start; i < array.length; i++) {
-            if (array[i] > array[indexOfCurrentMaximumValue]) {
-                indexOfCurrentMaximumValue = i;
+    private static int findMaximumIndex(int[] array, int start) {
+        int indexOMaximumValue = start;
+        for (int i = start + 1; i < array.length; i++) {
+            if (array[i] > array[indexOMaximumValue]) {
+                indexOMaximumValue = i;
             }
         }
-        return indexOfCurrentMaximumValue;
+        return indexOMaximumValue;
     }
 
     private static void swap(int[] array, int a, int b) {

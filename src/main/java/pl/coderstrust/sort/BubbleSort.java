@@ -1,4 +1,4 @@
-package pl.coderstrust.letsSortTogether;
+package pl.coderstrust.sort;
 
 import java.util.Arrays;
 
@@ -12,14 +12,13 @@ public class BubbleSort {
 
     public static int[] sort(int[] array) {
         if (array == null) {
-            throw new IllegalArgumentException("Array cannot be empty");
+            throw new IllegalArgumentException("Array cannot be null");
         }
-        for (int i = 0; i < (array.length - 1); i++) {
-            for (int j = 0; j < (array.length - 1 - i); j++) {
-                if (array[j] <= array[j + 1]) {
+        for (int i = 0; i < (array.length); i++) {
+            for (int j = 0; j < (array.length - i); j++)
+                if (array[j] >= array[j + 1]) {
                     swap(array, j, j + 1);
                 }
-            }
         }
         return array;
     }
