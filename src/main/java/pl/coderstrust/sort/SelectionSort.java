@@ -14,24 +14,29 @@ public class SelectionSort {
         if (array == null) {
             throw new IllegalArgumentException("Array cannot be null");
         }
-        int[] sortedArray = new int[array.length];
+        int[] sortedArray = copyArray(array);
         for (int i = 0; i < array.length; i++) {
-            sortedArray[i] = array[i];
-        }
-        for (int i = 0; i < array.length; i++) {
-            swap(sortedArray, i, findMaximumIndex(sortedArray, i));
+            swap(sortedArray, i, findMinimumIndex(sortedArray, i));
         }
         return sortedArray;
     }
 
-    private static int findMaximumIndex(int[] array, int start) {
-        int indexOMaximumValue = start;
+    private static int[] copyArray(int[] array) {
+        int[] newArray = new int[array.length];
+        for (int i = 0; i < array.length; i++) {
+            newArray[i] = array[i];
+        }
+        return newArray;
+    }
+
+    private static int findMinimumIndex(int[] array, int start) {
+        int indexOMinimumValue = start;
         for (int i = start + 1; i < array.length; i++) {
-            if (array[i] > array[indexOMaximumValue]) {
-                indexOMaximumValue = i;
+            if (array[i] < array[indexOMinimumValue]) {
+                indexOMinimumValue = i;
             }
         }
-        return indexOMaximumValue;
+        return indexOMinimumValue;
     }
 
     private static void swap(int[] array, int a, int b) {
