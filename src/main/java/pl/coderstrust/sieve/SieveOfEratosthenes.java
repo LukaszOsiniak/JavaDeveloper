@@ -13,6 +13,9 @@ public class SieveOfEratosthenes {
     }
 
     public static int[] sieve(int maximumNumber) {
+        if (maximumNumber < 0) {
+            throw new IllegalArgumentException("Maximum number cannot be negative");
+        }
         int[] array = new int[maximumNumber];
         fillArray(array);
         markMultiples(array);
@@ -22,9 +25,13 @@ public class SieveOfEratosthenes {
     private static void markMultiples(int[] array) {
         for (int i = 2; i < array.length; i++) {
             for (int j = i + i; j < array.length; j += i) {
-                array[j] = 0;
+                array[j] = MULTIPLE_MARKER();
             }
         }
+    }
+
+    private static int MULTIPLE_MARKER() {
+        return 0;
     }
 
     private static int[] fillPrimesArray(int[] array) {
@@ -44,12 +51,12 @@ public class SieveOfEratosthenes {
     }
 
     private static int counter(int[] array) {
-        int a = 0;
+        int j = 0;
         for (int i = 0; i < array.length; i++) {
             if (array[i] != 0) {
-                a++;
+                j++;
             }
         }
-        return a;
+        return j;
     }
 }
