@@ -1,5 +1,6 @@
 package pl.coderstrust.sieve;
 
+import java.nio.channels.MulticastChannel;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -38,7 +39,7 @@ public class SieveOfEratosthenes {
         int numberOfPrimes = counter(array);
         int[] primes = new int[numberOfPrimes];
         for (int i = 0, j = 0; i < array.length; i++) {
-            if (array[i] != 0) {
+            if (array[i] != MULTIPLE_MARKER()) {
                 primes[j++] = array[i];
             }
         }
@@ -53,7 +54,7 @@ public class SieveOfEratosthenes {
     private static int counter(int[] array) {
         int j = 0;
         for (int i = 0; i < array.length; i++) {
-            if (array[i] != 0) {
+            if (array[i] != MULTIPLE_MARKER()) {
                 j++;
             }
         }
