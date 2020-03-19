@@ -26,20 +26,18 @@ public class SieveOfEratosthenes {
     private static void markMultiples(int[] array) {
         for (int i = 2; i < array.length; i++) {
             for (int j = i + i; j < array.length; j += i) {
-                array[j] = MULTIPLE_MARKER();
+                array[j] = MULTIPLE_MARKER;
             }
         }
     }
 
-    private static int MULTIPLE_MARKER() {
-        return 0;
-    }
+    private static int MULTIPLE_MARKER = 0;
 
     private static int[] fillPrimesArray(int[] array) {
         int numberOfPrimes = counter(array);
         int[] primes = new int[numberOfPrimes];
         for (int i = 0, j = 0; i < array.length; i++) {
-            if (array[i] != MULTIPLE_MARKER()) {
+            if (array[i] != MULTIPLE_MARKER) {
                 primes[j++] = array[i];
             }
         }
@@ -54,7 +52,7 @@ public class SieveOfEratosthenes {
     private static int counter(int[] array) {
         int j = 0;
         for (int i = 0; i < array.length; i++) {
-            if (array[i] != MULTIPLE_MARKER()) {
+            if (array[i] != MULTIPLE_MARKER) {
                 j++;
             }
         }
