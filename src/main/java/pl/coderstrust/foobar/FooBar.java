@@ -6,16 +6,20 @@ public class FooBar {
         printFooBar(number);
     }
 
-    public static void printFooBar(int number) {
-        for (int i = 0; i <= number; i++) {
-            System.out.print(i + " ");
+    public static String[] printFooBar(int number) {
+        String[] newArray = new String[number];
+        for (int i = 0; i < number; i++) {
+            String tempStr;
+            tempStr = i + " ";
             if (i % 3 == 0) {
-                System.out.print("Foo");
+                tempStr = tempStr + "Foo";
             }
             if (i % 5 == 0) {
-                System.out.print("Bar");
+                tempStr = tempStr + "Bar";
             }
-            System.out.println();
+            System.out.println(tempStr);
+            newArray[i] = tempStr;
         }
+        return newArray;
     }
 }
