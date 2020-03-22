@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class MultiplicationTableTest {
     @Test
-    public void printMultiplicationTable() {
+    public void shouldReturnValidTable() {
         //Given
         String[][] expectedArray = {{"", "1", "2"}, {"1", "1", "2"}, {"2", "2", "4"}};
         int size = 3;
@@ -19,7 +19,7 @@ class MultiplicationTableTest {
     }
 
     @Test
-    public void printMultiplicationTable1() {
+    public void shouldReturnCorrectValue() {
         //Given
         String expectedValue = "16";
         int size = 10;
