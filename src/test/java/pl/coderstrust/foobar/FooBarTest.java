@@ -1,16 +1,20 @@
 package pl.coderstrust.foobar;
 
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.stream.Stream;
+
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.params.provider.Arguments.arguments;
+
 
 class FooBarTest {
-    @Test
-    public void shouldReturnValidArray() {
-        //Given
-        int size = 5;
-        String[] arrayExpected = new String[]{"0 FooBar", "1 ", "2 ", "3 Foo", "4 "};
-
+    @ParameterizedTest
+    @MethodSource("inputAndExpectedProvider")
+    public void shouldReturnValidArray(int size, String[] arrayExpected) {
         //When
         String[] actual = FooBar.printFooBar(size);
 
@@ -18,29 +22,28 @@ class FooBarTest {
         assertArrayEquals(arrayExpected, actual);
     }
 
-    @Test
-    public void shouldReturnValueWithBar() {
-        //Given
-        int size = 100;
-        String expectedAtIndex70 = "70 Bar";
-
-        //When
-        String[] actual = FooBar.printFooBar(size);
-
-        //Then
-        assertEquals(expectedAtIndex70, actual[70]);
+    static Stream<Arguments> inputAndExpectedProvider() {
+        return Stream.of(
+                arguments(5, new String[]{"0 FooBar", "1 ", "2 ", "3 Foo", "4 "}),
+                arguments(3, new String[]{"0 FooBar", "1 ", "2 "})
+        );
     }
 
-    @Test
-    public void shouldReturnValueWithFooBar() {
-        //Given
-        int size = 100;
-        String expectedAtIndex90 = "90 FooBar";
-
+    @ParameterizedTest
+    @MethodSource("sizeExpectedIndex")
+    public void shouldReturnValueWithBar(int size, String expected, int index) {
         //When
         String[] actual = FooBar.printFooBar(size);
 
         //Then
-        assertEquals(expectedAtIndex90, actual[90]);
+        assertEquals(expected, actual[index]);
+    }
+
+    static Stream<Arguments> sizeExpectedIndex() {
+        return Stream.of(
+                arguments(100, "70 Bar", 70),
+                arguments(100, "90 FooBar", 90),
+                arguments(100, "27 Foo", 27)
+        );
     }
 }
