@@ -10,20 +10,20 @@ public class MultiplicationTable {
         printMultiplicationTable(size);
     }
 
-    public static String[][] printMultiplicationTable(int size) {
-        String[][] matrix = new String[size][size];
+    public static int[][] printMultiplicationTable(int size) {
+        int[][] matrix = new int[size][size];
         System.out.format("%4s", "");
-        matrix[0][0] = "";
+        matrix[0][0] = -1;
         for (int i = 1; i < size; i++) {
-            matrix[0][i] = String.valueOf(i);
+            matrix[0][i] = i;
             System.out.format("%4d", i);
         }
         System.out.println();
         for (int i = 1; i < size; i++) {
-            matrix[i][0] = String.valueOf(i);
+            matrix[i][0] = i;
             System.out.format("%4d", i);
             for (int j = 1; j < size; j++) {
-                matrix[i][j] = String.valueOf(i * j);
+                matrix[i][j] = i * j;
                 System.out.format("%4d", i * j);
             }
             System.out.println();
