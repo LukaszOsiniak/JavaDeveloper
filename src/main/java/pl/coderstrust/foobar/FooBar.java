@@ -8,17 +8,20 @@ public class FooBar {
 
     public static String[] printFooBar(int number) {
         String[] newArray = new String[number];
+        String space = " ";
+        String foo = "Foo";
+        String bar = "Bar";
         for (int i = 0; i < number; i++) {
-            String tempStr;
-            tempStr = i + " ";
+            StringBuilder builder = new StringBuilder();
+            builder.append(i).append(space);
             if (i % 3 == 0) {
-                tempStr = tempStr + "Foo";
+                builder.append(foo);
             }
             if (i % 5 == 0) {
-                tempStr = tempStr + "Bar";
+                builder.append(bar);
             }
-            System.out.println(tempStr);
-            newArray[i] = tempStr;
+            System.out.println(builder.toString());
+            newArray[i] = builder.toString();
         }
         return newArray;
     }
