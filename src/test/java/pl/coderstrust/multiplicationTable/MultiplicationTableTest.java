@@ -19,7 +19,6 @@ class MultiplicationTableTest {
         int[][] subArray = createSubArray(actualArray, 1, 1);
         //Then
         assertArrayEquals(expectedArray, subArray);
-
     }
 
     private int[][] createSubArray(int[][] array, int startRow, int startColumn) {
@@ -46,10 +45,8 @@ class MultiplicationTableTest {
     public void shouldReturnCorrectValue(int size, int expectedValue, int rowIndex, int columnIndex) {
         //When
         int[][] actualArray = MultiplicationTable.printMultiplicationTable(size);
-
         //Then
         assertEquals(expectedValue, actualArray[rowIndex][columnIndex]);
-
     }
 
     static Stream<Arguments> sizeExpectedValue() {
