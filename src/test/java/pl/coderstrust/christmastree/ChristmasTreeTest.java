@@ -21,8 +21,16 @@ class ChristmasTreeTest {
 
     static Stream<Arguments> inputAndExpectedOutputAtRow() {
         return Stream.of(
+                arguments(5, "    *", 0),
+                arguments(5, "   ***", 1),
                 arguments(5, "  *****", 2),
+                arguments(5, " *******", 3),
+                arguments(5, "*********", 4),
+                arguments(5, "   **", 5),
+                arguments(7, "      *", 0),
                 arguments(7, "*************", 6),
+                arguments(7, "     **", 7),
+                arguments(12, "           *", 0),
                 arguments(12, "          **", 12)
         );
     }
