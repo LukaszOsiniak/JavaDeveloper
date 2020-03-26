@@ -1,10 +1,11 @@
 package pl.coderstrust.sieve;
 
-import java.nio.channels.MulticastChannel;
 import java.util.Arrays;
 import java.util.Scanner;
 
 public class SieveOfEratosthenes {
+    private static int MULTIPLE_MARKER = 0;
+
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         System.out.println("Please put maximum number that will limit our seach of primary numbers:");
@@ -30,8 +31,6 @@ public class SieveOfEratosthenes {
             }
         }
     }
-
-    private static int MULTIPLE_MARKER = 0;
 
     private static int[] fillPrimesArray(int[] array) {
         int numberOfPrimes = counter(array);

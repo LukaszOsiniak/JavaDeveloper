@@ -6,16 +6,23 @@ public class FooBar {
         printFooBar(number);
     }
 
-    public static void printFooBar(int number) {
-        for (int i = 0; i <= number; i++) {
-            System.out.print(i + " ");
+    public static String[] printFooBar(int number) {
+        String[] newArray = new String[number];
+        String space = " ";
+        String foo = "Foo";
+        String bar = "Bar";
+        for (int i = 0; i < number; i++) {
+            StringBuilder builder = new StringBuilder();
+            builder.append(i).append(space);
             if (i % 3 == 0) {
-                System.out.print("Foo");
+                builder.append(foo);
             }
             if (i % 5 == 0) {
-                System.out.print("Bar");
+                builder.append(bar);
             }
-            System.out.println();
+            System.out.println(builder.toString());
+            newArray[i] = builder.toString();
         }
+        return newArray;
     }
 }
