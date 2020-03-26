@@ -11,30 +11,30 @@ public class ChristmasTree {
     }
 
     public static String[] printChristmasTree(int size) {
-        String[] array = new String[size];
+        String[] array = new String[size+1];
         String space = " ";
         String asterisk = "*";
-        for (int i = 1; i <= size; i++) {
+        for (int i = 0; i < size; i++) {
             StringBuilder builder = new StringBuilder();
-            for (int j = 0; j < size - i; j++) {
+            for (int j = 0; j < size - i - 1; j++) {
                 System.out.print(" ");
                 builder.append(space);
             }
-            for (int j = 0; j < (i * 2 - 1); j++) {
+            for (int j = 0; j < (i + 1) * 2 - 1; j++) {
                 System.out.print("*");
                 builder.append(asterisk);
             }
             System.out.println();
-            array[i - 1] = builder.toString();
+            array[i] = builder.toString();
         }
         StringBuilder rootRowBuilder = new StringBuilder();
-        for (int i = 1; i < (size - 1); i++) {
+        for (int i = 0; i < size-2; i++) {
             System.out.print(" ");
             rootRowBuilder.append(space);
         }
         System.out.print("**");
         rootRowBuilder.append(asterisk).append(asterisk);
-        array[size - 1] = rootRowBuilder.toString();
+        array[size] = rootRowBuilder.toString();
         return array;
     }
 }
