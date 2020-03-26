@@ -7,34 +7,34 @@ public class ChristmasTree {
         Scanner scan = new Scanner(System.in);
         System.out.println("Please put size of Christmas Tree:");
         int size = scan.nextInt();
-        printChristmasTree(size);
+        getChristmasTree(size);
     }
 
-    public static String[] printChristmasTree(int size) {
-        String[] array = new String[size+1];
+    public static String[] getChristmasTree(int size) {
+        if (size < 3) {
+            throw new IllegalArgumentException("Provided size cannot be lower than 3");
+        }
+        String[] result = new String[size + 1];
         String space = " ";
         String asterisk = "*";
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < size; i++) {
-            StringBuilder builder = new StringBuilder();
+            sb.setLength(0);
             for (int j = 0; j < size - i - 1; j++) {
-                System.out.print(" ");
-                builder.append(space);
+                sb.append(space);
             }
             for (int j = 0; j < (i + 1) * 2 - 1; j++) {
-                System.out.print("*");
-                builder.append(asterisk);
+                sb.append(asterisk);
             }
             System.out.println();
-            array[i] = builder.toString();
+            result[i] = sb.toString();
         }
-        StringBuilder rootRowBuilder = new StringBuilder();
-        for (int i = 0; i < size-2; i++) {
-            System.out.print(" ");
-            rootRowBuilder.append(space);
+        sb.setLength(0);
+        for (int i = 0; i < size - 2; i++) {
+            sb.append(space);
         }
-        System.out.print("**");
-        rootRowBuilder.append(asterisk).append(asterisk);
-        array[size] = rootRowBuilder.toString();
-        return array;
+        sb.append(asterisk).append(asterisk);
+        result[size] = sb.toString();
+        return result;
     }
 }
