@@ -26,7 +26,6 @@ public class ChristmasTree {
             for (int j = 0; j < (i + 1) * 2 - 1; j++) {
                 sb.append(asterisk);
             }
-            System.out.println();
             result[i] = sb.toString();
         }
         sb.setLength(0);
