@@ -1,5 +1,6 @@
 package pl.coderstrust.pascal;
 
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -26,5 +27,17 @@ class PascalTriangleTest {
                 arguments(5, new int[][]{{1, 0, 0, 0, 0}, {1, 1, 0, 0, 0}, {1, 2, 1, 0, 0},
                         {1, 3, 3, 1, 0}, {1, 4, 6, 4, 1}})
         );
+    }
+
+    @Test
+    void shouldThrowException() {
+        //Given
+        int levels = 0;
+
+        //When
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> PascalTriangle.printPascalTriangle(levels));
+
+        //Then
+        assertEquals(exception.getMessage(), "Levels cannot be lower than zero");
     }
 }
