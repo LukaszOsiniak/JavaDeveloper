@@ -7,34 +7,24 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 class ChristmasTreeTest {
     @ParameterizedTest
     @MethodSource("christmasTreeArguments")
-    void shouldReturnCorrectChristmasTree(int size, String lineExpected, int row) {
+    void shouldReturnCorrectChristmasTree(int size, String[] expected) {
         //When
         String[] actual = ChristmasTree.getChristmasTree(size);
 
         //Then
-        assertEquals(lineExpected, actual[row]);
+        assertArrayEquals(expected, actual);
     }
 
     static Stream<Arguments> christmasTreeArguments() {
         return Stream.of(
-                arguments(5, "    *", 0),
-                arguments(5, "   ***", 1),
-                arguments(5, "  *****", 2),
-                arguments(5, " *******", 3),
-                arguments(5, "*********", 4),
-                arguments(5, "   **", 5),
-                arguments(7, "      *", 0),
-                arguments(7, "*************", 6),
-                arguments(7, "     **", 7),
-                arguments(12, "           *", 0),
-                arguments(12, "          **", 12)
+                arguments(5, new String[]{"    *", "   ***", "  *****", " *******", "*********", "   **"}),
+                arguments(7, new String[]{"      *", "     ***", "    *****", "   *******", "  *********", " ***********", "*************", "     **"})
         );
     }
 
@@ -49,6 +39,4 @@ class ChristmasTreeTest {
         //Then
         assertEquals(exception.getMessage(), "Provided size cannot be lower than 3");
     }
-
-
 }
