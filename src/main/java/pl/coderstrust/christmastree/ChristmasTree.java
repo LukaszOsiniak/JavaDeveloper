@@ -19,7 +19,6 @@ public class ChristmasTree {
         String asterisk = "*";
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < size; i++) {
-            sb.setLength(0);
             for (int j = 0; j < size - i - 1; j++) {
                 sb.append(space);
             }
@@ -27,8 +26,8 @@ public class ChristmasTree {
                 sb.append(asterisk);
             }
             result[i] = sb.toString();
+            sb.setLength(0);
         }
-        sb.setLength(0);
         for (int i = 0; i < size - 2; i++) {
             sb.append(space);
         }

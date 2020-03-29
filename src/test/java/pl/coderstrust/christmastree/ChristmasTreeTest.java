@@ -29,7 +29,7 @@ class ChristmasTreeTest {
     }
 
     @Test
-    void shouldThrowException() {
+    void shouldThrowExceptionForInvalidSize() {
         //Given
         int size = 2;
 
