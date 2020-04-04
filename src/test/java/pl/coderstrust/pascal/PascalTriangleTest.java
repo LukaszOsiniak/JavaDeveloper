@@ -35,7 +35,7 @@ class PascalTriangleTest {
         int levels = 0;
 
         //When
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> PascalTriangle.printPascalTriangle(levels));
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> PascalTriangle.createPascalTriangle(levels));
 
         //Then
         assertEquals(exception.getMessage(), "Levels cannot be lower than zero");

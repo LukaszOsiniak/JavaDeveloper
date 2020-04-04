@@ -11,9 +11,6 @@ public class PascalTriangle {
     }
 
     public static void printPascalTriangle(int levels) {
-        if (levels < 1) {
-            throw new IllegalArgumentException("Levels cannot be lower than zero");
-        }
         int[][] matrix = createPascalTriangle(levels);
         for (int i = 0; i < levels; i++) {
             for (int j = 0; j < (levels - i - 1); j++) {
@@ -27,6 +24,9 @@ public class PascalTriangle {
     }
 
     public static int[][] createPascalTriangle(int levels) {
+        if (levels < 1) {
+            throw new IllegalArgumentException("Levels cannot be lower than zero");
+        }
         int[][] result = new int[levels][levels];
         for (int i = 0; i < levels; i++) {
             for (int j = 0; j < (i + 1); j++) {
