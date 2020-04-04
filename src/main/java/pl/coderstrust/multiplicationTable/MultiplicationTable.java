@@ -7,31 +7,38 @@ public class MultiplicationTable {
         Scanner scan = new Scanner(System.in);
         System.out.println("Please give size of multiplication table:");
         int size = scan.nextInt();
-        createMultiplicationTable(size);
+        printMultiplicationTable(size);
     }
 
     public static int[][] createMultiplicationTable(int size) {
-        int[][] matrix = new int[size][size];
-        System.out.format("%4s", "");
-        matrix[0][0] = -1;
-        for (int i = 1; i < size; i++) {
-            matrix[0][i] = i;
-            System.out.format("%4d", i);
+        if (size < 1) {
+            throw new IllegalArgumentException("Size cannot be lower than 1");
         }
-        System.out.println();
-        for (int i = 1; i < size; i++) {
+        int[][] matrix = new int[size + 1][size + 1];
+        matrix[0][0] = -1;
+        for (int i = 1; i < matrix.length; i++) {
+            matrix[0][i] = i;
+        }
+        for (int i = 1; i < matrix.length; i++) {
             matrix[i][0] = i;
-            System.out.format("%4d", i);
-            for (int j = 1; j < size; j++) {
+            for (int j = 1; j < matrix.length; j++) {
                 matrix[i][j] = i * j;
-                System.out.format("%4d", i * j);
             }
-            System.out.println();
         }
         return matrix;
     }
 
-    //void printMultiplicationTable(int size) {
-        // int[][] table = getMutiplicationTable(size)
-        // print table here
+    static void printMultiplicationTable(int size) {
+        int[][] table = createMultiplicationTable(size);
+        for (int i = 0; i < table.length; i++) {
+            for (int j = 0; j < table.length; j++) {
+                if (i == 0 && j == 0) {
+                    System.out.format("%3s", "");
+                } else {
+                    System.out.format("%3d", table[j][i]);
+                }
+            }
+            System.out.println();
+        }
+    }
 }
