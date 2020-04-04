@@ -1,6 +1,5 @@
 package pl.coderstrust.multiplicationTable;
 
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -15,7 +14,7 @@ class MultiplicationTableTest {
     @MethodSource("inputSizeAndExpectedTable")
     public void shouldReturnValidTable(int size, int[][] expectedArray) {
         //When
-        int[][] actualArray = MultiplicationTable.printMultiplicationTable(size);
+        int[][] actualArray = MultiplicationTable.createMultiplicationTable(size);
         int[][] subArray = createSubArray(actualArray, 1, 1);
         //Then
         assertArrayEquals(expectedArray, subArray);
@@ -44,7 +43,7 @@ class MultiplicationTableTest {
     @MethodSource("sizeExpectedValue")
     public void shouldReturnCorrectValue(int size, int expectedValue, int rowIndex, int columnIndex) {
         //When
-        int[][] actualArray = MultiplicationTable.printMultiplicationTable(size);
+        int[][] actualArray = MultiplicationTable.createMultiplicationTable(size);
         //Then
         assertEquals(expectedValue, actualArray[rowIndex][columnIndex]);
     }
