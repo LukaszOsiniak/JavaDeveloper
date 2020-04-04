@@ -12,16 +12,16 @@ import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 class PascalTriangleTest {
     @ParameterizedTest
-    @MethodSource("inputAndExpectedOutput")
-    void shouldCreatePascalTriangle(int levels, int[][] numbersExpected) {
+    @MethodSource("pascalTriangleArguments")
+    void shouldCreatePascalTriangle(int levels, int[][] numbers) {
         //When
         int[][] actual = PascalTriangle.createPascalTriangle(levels);
 
         //Then
-        assertArrayEquals(numbersExpected, actual);
+        assertArrayEquals(numbers, actual);
     }
 
-    static Stream<Arguments> inputAndExpectedOutput() {
+    static Stream<Arguments> pascalTriangleArguments() {
         return Stream.of(
                 arguments(3, new int[][]{{1, 0, 0}, {1, 1, 0}, {1, 2, 1}}),
                 arguments(5, new int[][]{{1, 0, 0, 0, 0}, {1, 1, 0, 0, 0}, {1, 2, 1, 0, 0},
@@ -30,7 +30,7 @@ class PascalTriangleTest {
     }
 
     @Test
-    void shouldThrowException() {
+    void shouldThrowExceptionForInvalidLevels() {
         //Given
         int levels = 0;
 
