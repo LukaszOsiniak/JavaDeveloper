@@ -1,5 +1,7 @@
 package pl.coderstrust.pascal;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class PascalTriangle {
@@ -11,27 +13,25 @@ public class PascalTriangle {
     }
 
     public static void printPascalTriangle(int levels) {
-        int[][] matrix = createPascalTriangle(levels);
-        for (int i = 0; i < levels; i++) {
-            for (int j = 0; j < (levels - i - 1); j++) {
-                System.out.printf("%2s", "");
-            }
-            for (int j = 0; j < (i + 1); j++) {
-                System.out.printf("%4d", matrix[i][j]);
-            }
-            System.out.println();
+        List<String> triangle = createPascalTriangle(levels);
+
+        for (int i = 0; i < triangle.size(); i++) {
+            System.out.format("%" + (triangle.size() - i) + "s%s%n", "", triangle.get(i));
         }
     }
 
-    public static int[][] createPascalTriangle(int levels) {
+    public static List<String> createPascalTriangle(int levels) {
         if (levels < 1) {
             throw new IllegalArgumentException("Levels cannot be lower than zero");
         }
-        int[][] result = new int[levels][levels];
+        List<String> result = new ArrayList<>();
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < levels; i++) {
             for (int j = 0; j < (i + 1); j++) {
-                result[i][j] = calculateValue(i, j);
+                sb.append(calculateValue(i, j)).append(" ");
             }
+            result.add(sb.toString());
+            sb.setLength(0);
         }
         return result;
     }
