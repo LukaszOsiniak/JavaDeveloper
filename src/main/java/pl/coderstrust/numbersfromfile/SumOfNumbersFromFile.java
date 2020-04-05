@@ -10,14 +10,12 @@ import java.util.Scanner;
 
 public class SumOfNumbersFromFile {
     public static void main(String[] args) {
-        System.out.println(System.getProperty("user.dir"));
         try {
             List<String> resultLines = readingNumbersFromFile();
             saveStringToFile(resultLines);
         } catch (IOException e) {
             System.out.println("Error" + e.getMessage());
         }
-
     }
 
     public static List<String> readingNumbersFromFile() throws FileNotFoundException {
