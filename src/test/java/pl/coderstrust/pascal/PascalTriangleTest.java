@@ -25,9 +25,9 @@ class PascalTriangleTest {
 
     static Stream<Arguments> pascalTriangleArguments() {
         return Stream.of(
-                arguments(3, Arrays.asList("1 ", "1 1 ", "1 2 1 "),
-                        arguments(5, Arrays.asList("1 ", "1 1 ", "1 2 1 ", "1 3 3 1 ", "1 4 6 4 1 "))
-                ));
+                arguments(3, Arrays.asList("1", "1 1", "1 2 1")),
+                arguments(5, Arrays.asList("1", "1 1", "1 2 1", "1 3 3 1", "1 4 6 4 1"))
+        );
     }
 
     @Test

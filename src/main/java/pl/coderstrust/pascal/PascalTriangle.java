@@ -30,7 +30,7 @@ public class PascalTriangle {
             for (int j = 0; j < (i + 1); j++) {
                 sb.append(calculateValue(i, j)).append(" ");
             }
-            result.add(sb.toString());
+            result.add(sb.toString().trim());
             sb.setLength(0);
         }
         return result;
