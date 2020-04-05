@@ -10,17 +10,18 @@ import java.util.Scanner;
 
 public class SumOfNumbersFromFile {
     public static void main(String[] args) {
+        System.out.println(System.getProperty("user.dir"));
         try {
             List<String> resultLines = readingNumbersFromFile();
             saveStringToFile(resultLines);
         } catch (IOException e) {
-            System.out.println("Error");
+            System.out.println("Error" + e.getMessage());
         }
 
     }
 
     public static List<String> readingNumbersFromFile() throws FileNotFoundException {
-        File file = new File("D:\\code\\solutions-18-lukasz\\src\\main\\java\\pl\\coderstrust\\numbersfromfile\\numbers.txt");
+        File file = new File("src/main/java/pl/coderstrust/numbersfromfile/numbers.txt");
         Scanner scanFile = new Scanner(file);
         List<String> resultLines = new ArrayList<>();
         while (scanFile.hasNextLine()) {
@@ -50,7 +51,7 @@ public class SumOfNumbersFromFile {
     }
 
     private static void saveStringToFile(List<String> lines) throws IOException {
-        Path path = Paths.get("D:\\code\\solutions-18-lukasz\\src\\main\\java\\pl\\coderstrust\\numbersfromfile\\summingNumbers.txt");
+        Path path = Paths.get("src/main/java/pl/coderstrust/numbersfromfile/summingNumbers.txt");
         Files.write(path, lines);
     }
 }
