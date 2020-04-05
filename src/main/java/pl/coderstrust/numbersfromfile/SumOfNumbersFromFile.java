@@ -1,27 +1,36 @@
 package pl.coderstrust.numbersfromfile;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class SumOfNumbersFromFile {
     public static void main(String[] args) {
         try {
-            readingNumbersFromFile();
-        } catch (FileNotFoundException e) {
+            List<String> resultLines = readingNumbersFromFile();
+            saveStringToFile(resultLines);
+        } catch (IOException e) {
             System.out.println("Error");
         }
+
     }
 
-    public static void readingNumbersFromFile() throws FileNotFoundException {
+    public static List<String> readingNumbersFromFile() throws FileNotFoundException {
         File file = new File("D:\\code\\solutions-18-lukasz\\src\\main\\java\\pl\\coderstrust\\numbersfromfile\\numbers.txt");
         Scanner scanFile = new Scanner(file);
+        List<String> resultLines = new ArrayList<>();
         while (scanFile.hasNextLine()) {
             String line = scanFile.nextLine();
             String formattedLine = readAndFormatLine(line);
+            resultLines.add(formattedLine);
             System.out.println(formattedLine);
         }
         scanFile.close();
+        return resultLines;
     }
 
     private static String readAndFormatLine(String line) {
@@ -38,5 +47,10 @@ public class SumOfNumbersFromFile {
         }
         sb.append("=").append(sum);
         return sb.toString();
+    }
+
+    private static void saveStringToFile(List<String> lines) throws IOException {
+        Path path = Paths.get("D:\\code\\solutions-18-lukasz\\src\\main\\java\\pl\\coderstrust\\numbersfromfile\\summingNumbers.txt");
+        Files.write(path, lines);
     }
 }
