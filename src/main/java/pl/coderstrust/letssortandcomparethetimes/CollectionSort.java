@@ -15,6 +15,6 @@ public class CollectionSort implements SortingMethod {
         for (int i = 0; i < list.size(); i++) {
             sortedArray[i] = list.get(i);
         }
-        return array;
+        return sortedArray;
     }
 }
