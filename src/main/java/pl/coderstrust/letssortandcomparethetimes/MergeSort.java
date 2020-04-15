@@ -1,61 +1,53 @@
 package pl.coderstrust.letssortandcomparethetimes;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 
 public class MergeSort implements SortingMethod {
     public int[] sort(int[] array) {
-        List<Integer> listToSort = new ArrayList<>();
-        for (int i : array) {
-            listToSort.add(i);
+        if (array.length == 1) {
+            return array;
         }
-        List<Integer> sorted = mergeSort(listToSort);
-        for (int i = 0; i < sorted.size(); i++) {
-            array[i] = sorted.get(i);
-        }
-        return array;
-    }
+        int half = array.length / 2;
+        int[] left = Arrays.copyOfRange(array, 0, half);
+        int[] right = Arrays.copyOfRange(array, half, array.length);
 
-    public static List<Integer> mergeSort(List<Integer> list) {
-
-        if (list.size() == 1) {
-            return list;
-        }
-        int half = list.size() / 2;
-        List<Integer> left = list.subList(0, half);
-        List<Integer> right = list.subList(half, list.size());
-
-        left = mergeSort(left);
-        right = mergeSort(right);
+        left = sort(left);
+        right = sort(right);
 
         return merge(left, right);
     }
 
-    public static List<Integer> merge(List<Integer> left, List<Integer> right) {
-        List<Integer> result = new ArrayList<>();
+    public static int[] merge(int[] left, int[] right) {
+        int[] result = new int[left.length + right.length];
         int i = 0, j = 0;
-        while (i < left.size() || j < right.size()) {
-
-            if (j == right.size()) {
-                result.add(left.get(i));
+        int resultInx = 0;
+        while (i < left.length || j < right.length) {
+            if (j == right.length) {
+                result[resultInx] = left[i];
                 i++;
-            } else if (i == left.size()) {
-                result.add(right.get(j));
+                resultInx++;
+            } else if (i == left.length) {
+                result[resultInx] = right[j];
                 j++;
-            } else if (left.size() == 1 && right.size() == 1) {
-                if (left.get(i) >= right.get(j)) {
-                    result.add(right.get(j));
+                resultInx++;
+            } else if (left.length == 1 && right.length == 1) {
+                if (left[i] >= right[j]) {
+                    result[resultInx] = right[j];
                     j++;
+                    resultInx++;
                 } else {
-                    result.add(left.get(i));
+                    result[resultInx] = left[i];
                     i++;
+                    resultInx++;
                 }
-            } else if (left.get(i) <= right.get(j)) {
-                result.add(left.get(i));
+            } else if (left[i] <= right[j]) {
+                result[resultInx] = left[i];
                 i++;
+                resultInx++;
             } else {
-                result.add(right.get(j));
+                result[resultInx] = right[j];
                 j++;
+                resultInx++;
             }
         }
         return result;
