@@ -1,13 +1,14 @@
 package pl.coderstrust.letssortandcomparethetimes;
 
 public class BubbleSort implements SortingMethod {
+
     public int[] sort(int[] array) {
         if (array == null) {
             throw new IllegalArgumentException("Array cannot be null");
         }
         int[] sortedArray = copyArray(array);
-        for (int i = 1; i < (sortedArray.length); i++) {
-            for (int j = 0; j < (sortedArray.length - i); j++)
+        for (int i = 1; i < sortedArray.length; i++) {
+            for (int j = 0; j < sortedArray.length - i; j++)
                 if (sortedArray[j] >= sortedArray[j + 1]) {
                     swap(sortedArray, j, j + 1);
                 }

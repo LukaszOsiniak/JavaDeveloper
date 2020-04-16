@@ -3,6 +3,7 @@ package pl.coderstrust.letssortandcomparethetimes;
 import java.util.Arrays;
 
 public class MergeSort implements SortingMethod {
+
     public int[] sort(int[] array) {
         if (array.length == 1) {
             return array;
@@ -20,34 +21,34 @@ public class MergeSort implements SortingMethod {
     public static int[] merge(int[] left, int[] right) {
         int[] result = new int[left.length + right.length];
         int i = 0, j = 0;
-        int resultInx = 0;
+        int resultIndex = 0;
         while (i < left.length || j < right.length) {
             if (j == right.length) {
-                result[resultInx] = left[i];
+                result[resultIndex] = left[i];
                 i++;
-                resultInx++;
+                resultIndex++;
             } else if (i == left.length) {
-                result[resultInx] = right[j];
+                result[resultIndex] = right[j];
                 j++;
-                resultInx++;
+                resultIndex++;
             } else if (left.length == 1 && right.length == 1) {
                 if (left[i] >= right[j]) {
-                    result[resultInx] = right[j];
+                    result[resultIndex] = right[j];
                     j++;
-                    resultInx++;
+                    resultIndex++;
                 } else {
-                    result[resultInx] = left[i];
+                    result[resultIndex] = left[i];
                     i++;
-                    resultInx++;
+                    resultIndex++;
                 }
             } else if (left[i] <= right[j]) {
-                result[resultInx] = left[i];
+                result[resultIndex] = left[i];
                 i++;
-                resultInx++;
+                resultIndex++;
             } else {
-                result[resultInx] = right[j];
+                result[resultIndex] = right[j];
                 j++;
-                resultInx++;
+                resultIndex++;
             }
         }
         return result;

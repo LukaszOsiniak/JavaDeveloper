@@ -1,6 +1,7 @@
 package pl.coderstrust.letssortandcomparethetimes;
 
 public class QuickSort implements SortingMethod {
+
     public int[] sort(int[] array) {
         return quickSort(array, 0, array.length - 1);
     }

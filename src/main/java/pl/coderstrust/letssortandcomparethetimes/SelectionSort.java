@@ -1,6 +1,7 @@
 package pl.coderstrust.letssortandcomparethetimes;
 
 public class SelectionSort implements SortingMethod {
+
     public int[] sort(int[] array) {
         if (array == null) {
             throw new IllegalArgumentException("Array cannot be null");

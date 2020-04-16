@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class CollectionSort implements SortingMethod {
+
     public int[] sort(int[] array) {
         List<Integer> list = new ArrayList<>();
         for (int element : array) {
