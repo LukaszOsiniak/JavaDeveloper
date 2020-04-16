@@ -38,15 +38,13 @@ public abstract class SortingTestBase {
     }
 
     static Stream<Arguments> inputArray() {
-        int[] ints = {123, -56, 12, 100, 66, 39, -7};
         return Stream.of(
                 Arguments.arguments(new int[]{1}, new int[]{1}),
                 Arguments.arguments(new int[]{1, 2}, new int[]{1, 2}),
                 Arguments.arguments(new int[]{1, 2, 1}, new int[]{1, 1, 2}),
                 Arguments.arguments(new int[]{1, 1, 1}, new int[]{1, 1, 1}),
                 Arguments.arguments(new int[]{54, 32, 78, 1}, new int[]{1, 32, 54, 78}),
-                Arguments.arguments(new int[]{123, -56, 12, 100, 66, 39, -7}, new int[]{-56, -7, 12, 39, 66, 100, 123}),
-                Arguments.arguments(ints, new int[]{-56, -7, 12, 39, 66, 100, 123})
+                Arguments.arguments(new int[]{123, -56, 12, 100, 66, 39, -7}, new int[]{-56, -7, 12, 39, 66, 100, 123})
         );
     }
 }
