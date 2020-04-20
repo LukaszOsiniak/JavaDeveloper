@@ -9,27 +9,31 @@ public class QuickSort implements SortingMethod {
     public int[] quickSort(int[] array, int low, int high) {
         if (low < high) {
             int pi = partition(array, low, high);
-            quickSort(array, low, pi - 1);
+            quickSort(array, low, pi);
             quickSort(array, pi + 1, high);
         }
         return array;
     }
 
     public int partition(int[] arr, int low, int high) {
-        int pivot = arr[high];
-        int i = (low - 1);
-        for (int j = low; j < high; j++) {
-            if (arr[j] <= pivot) {
+        int pivot = arr[low];
+        int i = low - 1;
+        int j = high + 1;
+
+        while (true) {
+            do {
                 i++;
-                int temp = arr[i];
-                arr[i] = arr[j];
-                arr[j] = temp;
+            }
+            while (arr[i] < pivot);
+            do {
+                j--;
+            }
+            while (arr[j] > pivot);
+            if (i < j) {
+                ArrayUtils.swap(arr, i, j);
+            } else {
+                return j;
             }
         }
-        int temp = arr[i + 1];
-        arr[i + 1] = arr[high];
-        arr[high] = temp;
-
-        return i + 1;
     }
 }
