@@ -7,7 +7,7 @@ public class SelectionSort implements SortingMethod {
             throw new IllegalArgumentException("Array cannot be null");
         }
         for (int i = 0; i < array.length; i++) {
-            ArrayUtils.swap(array, i, findMinimumIndex(array, i));
+            ArraysUtils.swap(array, i, findMinimumIndex(array, i));
         }
         return array;
     }

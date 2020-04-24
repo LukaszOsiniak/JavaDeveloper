@@ -30,7 +30,7 @@ public class QuickSort implements SortingMethod {
             }
             while (arr[j] > pivot);
             if (i < j) {
-                ArrayUtils.swap(arr, i, j);
+                ArraysUtils.swap(arr, i, j);
             } else {
                 return j;
             }
