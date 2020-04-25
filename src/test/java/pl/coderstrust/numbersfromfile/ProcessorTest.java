@@ -1,10 +1,10 @@
 package pl.coderstrust.numbersfromfile;
 
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -13,14 +13,11 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 class ProcessorTest {
     @Mock
     NumbersProcessor numbersProcessor;
-//    @Before
-//    public void createMocks() {
-//        MockitoAnnotations.initMocks(this);
-//    }
+
     @Mock
     FileProcessor fileProcessor;
 
@@ -32,13 +29,14 @@ class ProcessorTest {
         // given
         when(fileProcessor.readLinesFromFile("fileName.txt")).thenReturn(Arrays.asList("1 2 3", "4 5 6"));
         when(numbersProcessor.processLine("1 2 3")).thenReturn("1+2+3=6");
+        when(numbersProcessor.processLine("4 5 6")).thenReturn("4+5+6=15");
 
         // when
         processor.process("fileName.txt", "output.txt");
 
         // then
-        verify(fileProcessor).readLinesFromFile("src/test/resources/1000.txt");
+        verify(fileProcessor).readLinesFromFile("fileName.txt");
         verify(numbersProcessor).processLine("1 2 3");
-        verify(fileProcessor).writeLinesToFile(Arrays.asList("1+2+3=6"),  "src/main/java/pl/coderstrust/numbersfromfile/summingNumbers.txt");
+        verify(fileProcessor).writeLinesToFile(Arrays.asList("1+2+3=6", "4+5+6=15"), "output.txt");
     }
 }
