@@ -1,26 +1,28 @@
 package pl.coderstrust.isthatfibonaccinumber;
 
 import java.util.HashSet;
+import java.util.Set;
 
 public class FibonacciChecker {
 
-    boolean isFibonacciNumber(long number) {
-        long numberA = 0;
-        long numberB = 1;
-        long sum = 0;
-        HashSet<Long> fibonacciSequence = new HashSet<>();
+    private static Set<Long> bankOfFibonacciNumbers = new HashSet<>();
+    private static Set<Long> bankOfNonFibonacciNumbers = new HashSet<>();
 
-        while (number > sum) {
-            for (int i = 2; i <= number; i++) {
-                sum = numberA + numberB;
-                numberA = numberB;
-                numberB = sum;
-                fibonacciSequence.add(sum);
-                if (fibonacciSequence.contains(number)) {
-                    return true;
-                }
-            }
+    public static boolean isFibonacciNumber(long number) {
+        if(number<=0) {
+            return false;
         }
+        if(bankOfFibonacciNumbers.contains(number)){
+            return true;
+        }
+        if(bankOfNonFibonacciNumbers.contains(number)) {
+            return false;
+        }
+        if((((Math.sqrt((5 * number * number) + 4)) % 1) == 0) || (((Math.sqrt((5 * number * number) - 4)) % 1) == 0)) {
+            bankOfFibonacciNumbers.add(number);
+            return true;
+        }
+        bankOfNonFibonacciNumbers.add(number);
         return false;
     }
 }
