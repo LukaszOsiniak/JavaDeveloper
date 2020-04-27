@@ -1,5 +1,7 @@
 package pl.coderstrust.letssortandcomparethetimes;
 
+import static pl.coderstrust.letssortandcomparethetimes.ArraysUtils.swap;
+
 public class SelectionSort implements SortingMethod {
 
     public int[] sort(int[] array) {
@@ -7,7 +9,7 @@ public class SelectionSort implements SortingMethod {
             throw new IllegalArgumentException("Array cannot be null");
         }
         for (int i = 0; i < array.length; i++) {
-            ArraysUtils.swap(array, i, findMinimumIndex(array, i));
+            swap(array, i, findMinimumIndex(array, i));
         }
         return array;
     }

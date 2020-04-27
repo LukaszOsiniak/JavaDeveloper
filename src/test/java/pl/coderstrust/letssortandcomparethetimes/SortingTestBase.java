@@ -18,8 +18,8 @@ public abstract class SortingTestBase {
     @ParameterizedTest
     @MethodSource("getCommonArguments")
     public void shouldSortArray(int[] arrayToSort, int[] rightOutput) {
-        //when
         long startTime = System.currentTimeMillis();
+        //when
         int[] sortedArray = getSortingMethod().sort(arrayToSort);
         long endTime = System.currentTimeMillis();
         System.out.println(getSortingMethod().getClass().getCanonicalName() + " " + (endTime - startTime));
@@ -35,24 +35,24 @@ public abstract class SortingTestBase {
     static int[] sortedOneMillion;
 
     static {
-        Random r = new Random();
-        for (int i = 0; i < oneThousand.length; i++) {
-            oneThousand[i] = r.nextInt();
-        }
+        setupRandomData(oneThousand);
         sortedOneThousand = oneThousand.clone();
         Arrays.sort(sortedOneThousand);
 
-        for (int i = 0; i < oneHundredThousands.length; i++) {
-            oneHundredThousands[i] = r.nextInt();
-        }
+        setupRandomData(oneHundredThousands);
         sortedOneHundredThousand = oneHundredThousands.clone();
         Arrays.sort(sortedOneHundredThousand);
 
-        for (int i = 0; i < oneMillion.length; i++) {
-            oneMillion[i] = r.nextInt();
-        }
+        setupRandomData(oneMillion);
         sortedOneMillion = oneMillion.clone();
         Arrays.sort(sortedOneMillion);
+    }
+
+    static void setupRandomData(int[] array) {
+        Random r = new Random();
+        for (int i = 0; i < array.length; i++) {
+            array[i] = r.nextInt();
+        }
     }
 
     static Stream<Arguments> getCommonArguments() {

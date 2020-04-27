@@ -1,5 +1,7 @@
 package pl.coderstrust.letssortandcomparethetimes;
 
+import static pl.coderstrust.letssortandcomparethetimes.ArraysUtils.swap;
+
 public class QuickSort implements SortingMethod {
 
     public int[] sort(int[] array) {
@@ -23,14 +25,12 @@ public class QuickSort implements SortingMethod {
         while (true) {
             do {
                 i++;
-            }
-            while (arr[i] < pivot);
+            } while (arr[i] < pivot);
             do {
                 j--;
-            }
-            while (arr[j] > pivot);
+            } while (arr[j] > pivot);
             if (i < j) {
-                ArraysUtils.swap(arr, i, j);
+                swap(arr, i, j);
             } else {
                 return j;
             }
