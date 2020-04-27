@@ -7,6 +7,10 @@ public class Square extends Rectangle implements Figure {
         return side*side;
     }
 
+    public double getSide() {
+        return side;
+    }
+
     private double side;
     //a*a
 }

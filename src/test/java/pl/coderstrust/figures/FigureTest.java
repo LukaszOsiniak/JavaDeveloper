@@ -4,5 +4,16 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class FigureTest {
 
+testdlasquare
 
+
+
+
+    testdlacircle
+
+
+
+
+
+        testdlaTriam
 }
