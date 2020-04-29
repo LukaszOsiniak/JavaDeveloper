@@ -1,19 +1,20 @@
 package pl.coderstrust.figures;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class FigureTest {
 
-testdlasquare
+    @Test
+    public void shouldReturnCorrectAreaValue() {
+        //given
+        Figure figure = new Square(6);
 
+        //When
+        double result = figure.calculateArea();
 
-
-
-    testdlacircle
-
-
-
-
-
-        testdlaTriam
+        //Then
+        assertEquals(result, 36);
+    }
 }

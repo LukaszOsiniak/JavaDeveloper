@@ -1,16 +1,8 @@
 package pl.coderstrust.figures;
 
-public class Square extends Rectangle implements Figure {
+public class Square extends Rectangle {
 
-    @Override
-    public double calculateArea() {
-        return side*side;
+    public Square(double side) {
+        super(side, side);
     }
-
-    public double getSide() {
-        return side;
-    }
-
-    private double side;
-    //a*a
 }
