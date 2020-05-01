@@ -6,23 +6,23 @@ import java.util.Set;
 public class FibonacciChecker {
 
     private static Set<Long> bankOfFibonacciNumbers = new HashSet<>();
-    private static Set<Long> bankOfNonFibonacciNumbers = new HashSet<>();
+    private static final int NB_OF_FIBONACCI_LONG_TYPE_RANGE = 93;
 
     public static boolean isFibonacciNumber(long number) {
-        if(number<=0) {
-            return false;
+        return bankOfFibonacciNumbers.contains(number);
+    }
+
+    static {
+        bankOfFibonacciNumbers.add(0L);
+        bankOfFibonacciNumbers.add(1L);
+        long temp = 0;
+        long previousValue = 1;
+        long actualValue = 1;
+        for (int i = 2; i < NB_OF_FIBONACCI_LONG_TYPE_RANGE; i++) {
+            actualValue = temp + previousValue;
+            bankOfFibonacciNumbers.add(actualValue);
+            temp = previousValue;
+            previousValue = actualValue;
         }
-        if(bankOfFibonacciNumbers.contains(number)){
-            return true;
-        }
-        if(bankOfNonFibonacciNumbers.contains(number)) {
-            return false;
-        }
-        if((((Math.sqrt((5 * number * number) + 4)) % 1) == 0) || (((Math.sqrt((5 * number * number) - 4)) % 1) == 0)) {
-            bankOfFibonacciNumbers.add(number);
-            return true;
-        }
-        bankOfNonFibonacciNumbers.add(number);
-        return false;
     }
 }
