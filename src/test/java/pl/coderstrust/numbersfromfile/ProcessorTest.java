@@ -27,15 +27,15 @@ class ProcessorTest {
 
     @Test
     public void shouldProcessProvidedInputFileAndSaveResultToProvidedOutputFile() throws IOException {
-        // given
+        //Given
         when(fileProcessor.readLinesFromFile("fileName.txt")).thenReturn(Arrays.asList("1 2 3", "4 5 6"));
         when(numbersProcessor.processLine("1 2 3")).thenReturn("1+2+3=6");
         when(numbersProcessor.processLine("4 5 6")).thenReturn("4+5+6=15");
 
-        // when
+        //When
         processor.process("fileName.txt", "output.txt");
 
-        // then
+        //Then
         verify(fileProcessor).readLinesFromFile("fileName.txt");
         verify(numbersProcessor).processLine("1 2 3");
         verify(fileProcessor).writeLinesToFile(Arrays.asList("1+2+3=6", "4+5+6=15"), "output.txt");
