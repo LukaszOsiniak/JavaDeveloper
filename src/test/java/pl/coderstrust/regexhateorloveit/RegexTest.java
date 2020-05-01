@@ -8,11 +8,11 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 class RegexTest {
+
     @Disabled("The test took 38 min 23 sec.")
     @Test
     public void shouldReturnTrueForAllValidIpAdresses() {
@@ -36,29 +36,63 @@ class RegexTest {
     public void shouldReturnTrueWhenValidIpNumbers() {
         for (int i = 0; i <= 255; i++) {
             //when
-            boolean checkedIp = Regex.isIpAdress(i + ".0.0.0");
+            boolean isValidIpPos1 = Regex.isIpAdress(i + ".0.0.0");
+            boolean isValidIpPos2 = Regex.isIpAdress("0." + i + ".0.0");
+            boolean isValidIpPos3 = Regex.isIpAdress("0.0." + i + ".0");
+            boolean isValidIpPos4 = Regex.isIpAdress("0.0.0." + i);
             //then
-            System.out.println(i + " " + checkedIp);
-            assertTrue(checkedIp);
+            assertTrue(isValidIpPos1);
+            assertTrue(isValidIpPos2);
+            assertTrue(isValidIpPos3);
+            assertTrue(isValidIpPos4);
         }
     }
 
     @ParameterizedTest
-    @MethodSource("getIpFormula")
-    public void shouldReturnFalseForInvalidIp(String input, boolean output) {
+    @MethodSource("provideInvalidIpAdresses")
+    public void shouldReturnFalseForInvalidIp(String input) {
         //when
-        boolean checkedIp = Regex.isIpAdress(input);
+        boolean isValidIp = Regex.isIpAdress(input);
         //then
-        assertEquals(output, checkedIp);
+        assertFalse(isValidIp);
     }
 
-    static Stream<Arguments> getIpFormula() {
+    static Stream<Arguments> provideInvalidIpAdresses() {
         return Stream.of(
-                arguments("-1.1.1.1", false),
-                arguments("a.b.c.d", false),
-                arguments("1.1.*.1", false),
-                arguments("1.1", false),
-                arguments("....", false)
+                arguments("-1.1.1.1"),
+                arguments("a.b.c.d"),
+                arguments("abcd"),
+                arguments(""),
+                arguments("1.1.*.1"),
+                arguments("1.1"),
+                arguments("....")
+        );
+    }
+
+    @Test
+    public void shouldReturnFalseForNullValue() {
+        //when
+        boolean isValidIp = Regex.isIpAdress(null);
+        //then
+        assertFalse(isValidIp);
+    }
+
+    @ParameterizedTest
+    @MethodSource("provideValidIpAdresses")
+    public void shouldReturnTrueForValidIp(String ipAdress) {
+        //when
+        boolean isValidIp = Regex.isIpAdress(ipAdress);
+        //then
+        assertTrue(isValidIp);
+    }
+
+    static Stream<Arguments> provideValidIpAdresses() {
+        return Stream.of(
+                arguments("0.0.0.0"),
+                arguments("1.10.100.101"),
+                arguments("11.110.111.120"),
+                arguments("200.201.210.250"),
+                arguments("255.255.255.255")
         );
     }
 }
