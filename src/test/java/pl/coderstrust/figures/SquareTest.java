@@ -12,9 +12,9 @@ import static org.junit.jupiter.params.provider.Arguments.arguments;
 class SquareTest extends FigureTest {
 
     @ParameterizedTest
-    @MethodSource("providedValues")
+    @MethodSource("providedSideAndExpectedArea")
     public void shouldReturnCorrectAreaValue(double side, double area) {
-        //given
+        //Given
         Square square = new Square(side);
         //When
         double result = square.calculateArea();
@@ -22,7 +22,7 @@ class SquareTest extends FigureTest {
         assertEquals(result, area);
     }
 
-    static Stream<Arguments> providedValues() {
+    static Stream<Arguments> providedSideAndExpectedArea() {
         return Stream.of(
                 arguments(5, 25),
                 arguments(2, 4)

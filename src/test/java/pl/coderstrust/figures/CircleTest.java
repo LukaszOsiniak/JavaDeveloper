@@ -12,9 +12,9 @@ import static org.junit.jupiter.params.provider.Arguments.arguments;
 class CircleTest extends FigureTest {
 
     @ParameterizedTest
-    @MethodSource("providedValues")
-    public void shouldReturnCorrectAreaValue(double radius, double area) {
-        //given
+    @MethodSource("providedRadiusAndExpectedArea")
+    public void expectedArea(double radius, double area) {
+        //Given
         Circle circle = new Circle(radius);
         //When
         double result = circle.calculateArea();
@@ -22,10 +22,10 @@ class CircleTest extends FigureTest {
         assertEquals(result, area);
     }
 
-    static Stream<Arguments> providedValues() {
+    static Stream<Arguments> providedRadiusAndExpectedArea() {
         return Stream.of(
-                arguments(10, 314),
-                arguments(0.66, 1.367784)
+                arguments(10, 314.1592653589793),
+                arguments(0.66, 1.3684777599037141)
         );
     }
 }

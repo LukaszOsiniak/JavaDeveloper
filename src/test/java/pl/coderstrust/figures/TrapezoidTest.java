@@ -12,9 +12,9 @@ import static org.junit.jupiter.params.provider.Arguments.arguments;
 class TrapezoidTest {
 
     @ParameterizedTest
-    @MethodSource("providedValues")
+    @MethodSource("providedBasesHeightAndExpectedArea")
     public void shouldReturnCorrectAreaValue(double baseA, double baseB, double height, double area) {
-        //given
+        //Given
         Trapezoid trapezoid = new Trapezoid(baseA, baseB, height);
         //When
         double result = trapezoid.calculateArea();
@@ -22,7 +22,7 @@ class TrapezoidTest {
         assertEquals(result, area);
     }
 
-    static Stream<Arguments> providedValues() {
+    static Stream<Arguments> providedBasesHeightAndExpectedArea() {
         return Stream.of(
                 arguments(3, 4, 6, 21),
                 arguments(0.88, 4, 5, 12.2)

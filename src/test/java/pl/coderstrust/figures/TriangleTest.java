@@ -12,9 +12,9 @@ import static org.junit.jupiter.params.provider.Arguments.arguments;
 class TriangleTest extends FigureTest {
 
     @ParameterizedTest
-    @MethodSource("providedValues")
+    @MethodSource("providedBaseHeightAndExpectedArea")
     public void shouldReturnCorrectAreaValue(double base, double height, double area) {
-        //given
+        //Given
         Triangle triangle = new Triangle(base, height);
         //When
         double result = triangle.calculateArea();
@@ -22,7 +22,7 @@ class TriangleTest extends FigureTest {
         assertEquals(result, area);
     }
 
-    static Stream<Arguments> providedValues() {
+    static Stream<Arguments> providedBaseHeightAndExpectedArea() {
         return Stream.of(
                 arguments(4, 4, 8),
                 arguments(0.2, 25, 2.5)

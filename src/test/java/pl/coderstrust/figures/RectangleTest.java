@@ -12,9 +12,9 @@ import static org.junit.jupiter.params.provider.Arguments.arguments;
 class RectangleTest extends FigureTest {
 
     @ParameterizedTest
-    @MethodSource("providedValues")
+    @MethodSource("providedSidesAndExpectedArea")
     public void shouldReturnCorrectAreaValue(double sideA, double sideB, double area) {
-        //given
+        //Given
         Rectangle rectangle = new Rectangle(sideA, sideB);
         //When
         double result = rectangle.calculateArea();
@@ -22,7 +22,7 @@ class RectangleTest extends FigureTest {
         assertEquals(result, area);
     }
 
-    static Stream<Arguments> providedValues() {
+    static Stream<Arguments> providedSidesAndExpectedArea() {
         return Stream.of(
                 arguments(5, 6, 30),
                 arguments(2, 6, 12)

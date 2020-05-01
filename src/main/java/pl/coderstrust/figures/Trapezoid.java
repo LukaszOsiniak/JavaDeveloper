@@ -12,18 +12,6 @@ public class Trapezoid implements Figure {
         this.height = height;
     }
 
-    public void setBaseA(double baseA) {
-        this.baseA = baseA;
-    }
-
-    public void setBaseB(double baseB) {
-        this.baseB = baseB;
-    }
-
-    public void setHeight(double height) {
-        this.height = height;
-    }
-
     public double getBaseA() {
         return baseA;
     }
@@ -38,6 +26,6 @@ public class Trapezoid implements Figure {
 
     @Override
     public double calculateArea() {
-        return ((baseA+baseB)/2)*height;
+        return ((baseA + baseB) / 2) * height;
     }
 }
