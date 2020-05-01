@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -26,6 +27,6 @@ public class FileProcessor {
 
     public void writeLinesToFile(List<String> resultLines, String resultFileName) throws IOException {
         Path path = Paths.get(resultFileName);
-        Files.write(path, resultLines);
+        Files.write(path, resultLines, StandardOpenOption.CREATE);
     }
 }
