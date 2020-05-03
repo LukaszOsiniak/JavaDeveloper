@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -253,5 +254,184 @@ class ListBaseTest {
         assertEquals(1L, listOfNumbers.get(0));
         assertEquals(3L, listOfNumbers.get(1));
         assertEquals(2, listOfNumbers.size());
+    }
+
+    @Test
+    public void shouldRetainProvidedElementsCorrectly() {
+        //given
+        List<Long> listOfNumbers = new ArrayList<>();
+        listOfNumbers.add(1L);
+        listOfNumbers.add(2L);
+        listOfNumbers.add(3L);
+        List<Long> toBeRetained = new ArrayList<>();
+        toBeRetained.add(2L);
+        toBeRetained.add(3L);
+        //when
+        boolean retainedAll = listOfNumbers.retainAll(toBeRetained);
+        //then
+        assertTrue(retainedAll);
+        assertEquals(2L, listOfNumbers.get(0));
+        assertEquals(3L, listOfNumbers.get(1));
+        assertEquals(2, listOfNumbers.size());
+    }
+
+    @Test
+    public void shouldReturnVoidWhenCleared() {
+        //given
+        List<Long> listOfNumbers = new ArrayList<>();
+        listOfNumbers.add(1L);
+        listOfNumbers.add(2L);
+        listOfNumbers.add(3L);
+        //when
+        listOfNumbers.clear();
+        //then
+        assertEquals(0, listOfNumbers.size());
+        assertTrue(listOfNumbers.isEmpty());
+    }
+
+    @Test
+    public void shouldGetElementAtGivenIndex() {
+        //given
+        List<Long> listOfNumbers = new ArrayList<>();
+        Long element = 2L;
+        listOfNumbers.add(element);
+        //when
+        Long get = listOfNumbers.get(0);
+        //then
+        assertEquals(element, get);
+    }
+
+    @Test
+    public void shouldSetElementAtSpecifiedPosition() {
+        //given
+        List<Long> listOfNumbers = new ArrayList<>();
+        listOfNumbers.add(1L);
+        listOfNumbers.add(2L);
+        listOfNumbers.add(3L);
+        //when
+        Long set = listOfNumbers.set(1, 5L);
+        //then
+        assertEquals(2L, set);
+        assertEquals(5L, listOfNumbers.get(1));
+    }
+
+    @Test
+    public void shouldAddElementAtSpecifiedPosition() {
+        //given
+        List<Long> listOfNumbers = new ArrayList<>();
+        listOfNumbers.add(1L);
+        listOfNumbers.add(2L);
+        listOfNumbers.add(3L);
+        //when
+        listOfNumbers.add(1, 5L);
+        //then
+        assertEquals(5L, listOfNumbers.get(1));
+        assertEquals(2L, listOfNumbers.get(2));
+        assertEquals(3L, listOfNumbers.get(3));
+        assertEquals(4, listOfNumbers.size());
+    }
+
+    @Test
+    public void shouldRemoveElementAtSpecifiedPosition() {
+        //given
+        List<Long> listOfNumbers = new ArrayList<>();
+        listOfNumbers.add(1L);
+        listOfNumbers.add(2L);
+        listOfNumbers.add(3L);
+        //when
+        Long remove = listOfNumbers.remove(1);
+        //then
+        assertEquals(2L, remove);
+        assertEquals(3L, listOfNumbers.get(1));
+    }
+
+    @Test
+    public void shouldReturnIndexAtFirstOccurrence() {
+        //given
+        List<Long> listOfNumbers = new ArrayList<>();
+        listOfNumbers.add(1L);
+        listOfNumbers.add(2L);
+        listOfNumbers.add(3L);
+        //when
+        int indexOf = listOfNumbers.indexOf(3L);
+        int indexOfNonExistingEl = listOfNumbers.indexOf(5L);
+        //then
+        assertEquals(2, indexOf);
+        assertEquals(-1, indexOfNonExistingEl);
+    }
+
+    @Test
+    public void shouldReturnLastIndexOccuarnce() {
+        //given
+        List<Long> listOfNumbers = new ArrayList<>();
+        listOfNumbers.add(1L);
+        listOfNumbers.add(2L);
+        listOfNumbers.add(1L);
+        listOfNumbers.add(3L);
+        //when
+        int lastIndexOf = listOfNumbers.lastIndexOf(1L);
+        int indexOfNonExistingEl = listOfNumbers.indexOf(5L);
+        //then
+        assertEquals(2, lastIndexOf);
+        assertEquals(-1, indexOfNonExistingEl);
+    }
+
+    @Test
+    public void shouldReturnListIterator() {
+        //given
+        List<Long> listOfNumbers = new ArrayList<>();
+        listOfNumbers.add(1L);
+        listOfNumbers.add(2L);
+        listOfNumbers.add(3L);
+        //when
+        ListIterator<Long> listIterator = listOfNumbers.listIterator();
+        //then
+        assertEquals(0, listIterator.nextIndex());
+        assertEquals(1L, listIterator.next());
+    }
+
+    @Test
+    public void shouldReturnListIteratorAtSpecPosition() {
+        //given
+        List<Long> listOfNumbers = new ArrayList<>();
+        listOfNumbers.add(1L);
+        listOfNumbers.add(2L);
+        listOfNumbers.add(3L);
+        //when
+        ListIterator<Long> listIterator = listOfNumbers.listIterator(1);
+        //then
+        assertEquals(1, listIterator.nextIndex());
+        assertEquals(2L, listIterator.next());
+    }
+
+    @Test
+    public void shouldReturnSubListFromBaseList() {
+        //given
+        List<Long> listOfNumbers = new ArrayList<>();
+        listOfNumbers.add(1L);
+        listOfNumbers.add(2L);
+        listOfNumbers.add(3L);
+        listOfNumbers.add(4L);
+        //when
+        List<Long> sublist = listOfNumbers.subList(1, 2);
+        //then
+        assertEquals(2L, sublist.get(0));
+        assertEquals(3L, sublist.get(1));
+        assertEquals(2, sublist.size());
+    }
+
+    @Test
+    public void shouldReflectChangesOnSubList() {
+        //given
+        List<Long> listOfNumbers = new ArrayList<>();
+        listOfNumbers.add(1L);
+        listOfNumbers.add(2L);
+        listOfNumbers.add(3L);
+        listOfNumbers.add(4L);
+        //when
+        List<Long> sublist = listOfNumbers.subList(1, 2);
+        sublist.set(0, 10L);
+        //then
+        assertEquals(10L, listOfNumbers.get(1));
     }
 }
