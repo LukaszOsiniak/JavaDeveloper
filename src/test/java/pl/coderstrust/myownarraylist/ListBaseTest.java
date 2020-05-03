@@ -2,19 +2,20 @@ package pl.coderstrust.myownarraylist;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ListBaseTest {
+public abstract class ListBaseTest {
 
+    public abstract List<Long> createList();
+    
     @Test
     public void shouldReturnSizeZeroWhenEmpty() {
         //given
-        List<Long> listOfNumbers = new ArrayList<>();
+        List<Long> listOfNumbers = createList();
         //when
         int size = listOfNumbers.size();
         //then
@@ -24,7 +25,7 @@ class ListBaseTest {
     @Test
     public void shouldReturnCorrectSizeAfterAdd() {
         //given
-        List<Long> listOfNumbers = new ArrayList<>();
+        List<Long> listOfNumbers = createList();
         listOfNumbers.add(1L);
         listOfNumbers.add(2L);
         //when
@@ -36,7 +37,7 @@ class ListBaseTest {
     @Test
     public void shouldReturnTrueWhenEmpty() {
         //given
-        List<Long> listOfNumbers = new ArrayList<>();
+        List<Long> listOfNumbers = createList();
         //when
         boolean isEmpty = listOfNumbers.isEmpty();
         //then
@@ -46,7 +47,7 @@ class ListBaseTest {
     @Test
     public void shouldReturnFalseWhenAdded() {
         //given
-        List<Long> listOfNumbers = new ArrayList<>();
+        List<Long> listOfNumbers = createList();
         listOfNumbers.add(1L);
         //when
         boolean isEmpty = listOfNumbers.isEmpty();
@@ -57,7 +58,7 @@ class ListBaseTest {
     @Test
     public void containsShouldReturnTrue() {
         //given
-        List<Long> listOfNumbers = new ArrayList<>();
+        List<Long> listOfNumbers = createList();
         listOfNumbers.add(1L);
         listOfNumbers.add(2L);
         listOfNumbers.add(3L);
@@ -70,7 +71,7 @@ class ListBaseTest {
     @Test
     public void containsShouldReturnFalse() {
         //given
-        List<Long> listOfNumbers = new ArrayList<>();
+        List<Long> listOfNumbers = createList();
         listOfNumbers.add(1L);
         listOfNumbers.add(2L);
         listOfNumbers.add(3L);
@@ -83,7 +84,7 @@ class ListBaseTest {
     @Test
     public void shouldReturnIteratorObject() {
         //given
-        List<Long> listOfNumbers = new ArrayList<>();
+        List<Long> listOfNumbers = createList();
         listOfNumbers.add(1L);
         //when
         Iterator<Long> iterator = listOfNumbers.iterator();
@@ -95,7 +96,7 @@ class ListBaseTest {
     @Test
     public void shouldReturnCorrectArray() {
         //given
-        List<Long> listOfNumbers = new ArrayList<>();
+        List<Long> listOfNumbers = createList();
         listOfNumbers.add(1L);
         listOfNumbers.add(2L);
         //when
@@ -109,7 +110,7 @@ class ListBaseTest {
     @Test
     public void shouldReturnCorrectArrayOfType() {
         //given
-        List<Long> listOfNumbers = new ArrayList<>();
+        List<Long> listOfNumbers = createList();
         listOfNumbers.add(1L);
         listOfNumbers.add(2L);
         //when
@@ -123,7 +124,7 @@ class ListBaseTest {
     @Test
     public void shouldAddCorrect() {
         //given
-        List<Long> listOfNumbers = new ArrayList<>();
+        List<Long> listOfNumbers = createList();
         //when
         boolean changed = listOfNumbers.add(2L);
         //then
@@ -135,7 +136,7 @@ class ListBaseTest {
     @Test
     public void shouldRemoveElement() {
         //given
-        List<Long> listOfNumbers = new ArrayList<>();
+        List<Long> listOfNumbers = createList();
         listOfNumbers.add(1L);
         listOfNumbers.add(2L);
         listOfNumbers.add(3L);
@@ -149,11 +150,11 @@ class ListBaseTest {
     @Test
     public void shouldReturnTrueIfContainsAllElements() {
         //given
-        List<Long> listOfNumbers = new ArrayList<>();
+        List<Long> listOfNumbers = createList();
         listOfNumbers.add(1L);
         listOfNumbers.add(2L);
         listOfNumbers.add(3L);
-        List<Long> otherlistOfNumbers = new ArrayList<>();
+        List<Long> otherlistOfNumbers = createList();
         otherlistOfNumbers.add(2L);
         otherlistOfNumbers.add(3L);
         //when
@@ -165,11 +166,11 @@ class ListBaseTest {
     @Test
     public void shouldReturnFalseIfDoesNotContainsAllElements() {
         //given
-        List<Long> listOfNumbers = new ArrayList<>();
+        List<Long> listOfNumbers = createList();
         listOfNumbers.add(1L);
         listOfNumbers.add(2L);
         listOfNumbers.add(3L);
-        List<Long> otherlistOfNumbers = new ArrayList<>();
+        List<Long> otherlistOfNumbers = createList();
         otherlistOfNumbers.add(2L);
         otherlistOfNumbers.add(7L);
         //when
@@ -181,11 +182,11 @@ class ListBaseTest {
     @Test
     public void shouldReturnTrueIfAddedAllElements() {
         //given
-        List<Long> listOfNumbers = new ArrayList<>();
+        List<Long> listOfNumbers = createList();
         listOfNumbers.add(1L);
         listOfNumbers.add(2L);
         listOfNumbers.add(3L);
-        List<Long> toBeAdded = new ArrayList<>();
+        List<Long> toBeAdded = createList();
         toBeAdded.add(2L);
         toBeAdded.add(7L);
         //when
@@ -200,11 +201,11 @@ class ListBaseTest {
     @Test
     public void shouldReturnTrueIfAddedAllElementsAtGivenIndex() {
         //given
-        List<Long> listOfNumbers = new ArrayList<>();
+        List<Long> listOfNumbers = createList();
         listOfNumbers.add(1L);
         listOfNumbers.add(2L);
         listOfNumbers.add(3L);
-        List<Long> toBeAddedAtGivenIndex = new ArrayList<>();
+        List<Long> toBeAddedAtGivenIndex = createList();
         toBeAddedAtGivenIndex.add(5L);
         toBeAddedAtGivenIndex.add(7L);
         //when
@@ -222,11 +223,11 @@ class ListBaseTest {
     @Test
     public void shouldReturnTrueIfRemovedAllElements() {
         //given
-        List<Long> listOfNumbers = new ArrayList<>();
+        List<Long> listOfNumbers = createList();
         listOfNumbers.add(1L);
         listOfNumbers.add(2L);
         listOfNumbers.add(3L);
-        List<Long> toBeRemoved = new ArrayList<>();
+        List<Long> toBeRemoved = createList();
         toBeRemoved.add(2L);
         toBeRemoved.add(3L);
         //when
@@ -240,11 +241,11 @@ class ListBaseTest {
     @Test
     public void shouldReturnTrueIfDidNotRemoveAllElements() {
         //given
-        List<Long> listOfNumbers = new ArrayList<>();
+        List<Long> listOfNumbers = createList();
         listOfNumbers.add(1L);
         listOfNumbers.add(2L);
         listOfNumbers.add(3L);
-        List<Long> toBeRemoved = new ArrayList<>();
+        List<Long> toBeRemoved = createList();
         toBeRemoved.add(2L);
         toBeRemoved.add(7L);
         //when
@@ -259,11 +260,11 @@ class ListBaseTest {
     @Test
     public void shouldRetainProvidedElementsCorrectly() {
         //given
-        List<Long> listOfNumbers = new ArrayList<>();
+        List<Long> listOfNumbers = createList();
         listOfNumbers.add(1L);
         listOfNumbers.add(2L);
         listOfNumbers.add(3L);
-        List<Long> toBeRetained = new ArrayList<>();
+        List<Long> toBeRetained = createList();
         toBeRetained.add(2L);
         toBeRetained.add(3L);
         //when
@@ -278,7 +279,7 @@ class ListBaseTest {
     @Test
     public void shouldReturnVoidWhenCleared() {
         //given
-        List<Long> listOfNumbers = new ArrayList<>();
+        List<Long> listOfNumbers = createList();
         listOfNumbers.add(1L);
         listOfNumbers.add(2L);
         listOfNumbers.add(3L);
@@ -292,7 +293,7 @@ class ListBaseTest {
     @Test
     public void shouldGetElementAtGivenIndex() {
         //given
-        List<Long> listOfNumbers = new ArrayList<>();
+        List<Long> listOfNumbers = createList();
         Long element = 2L;
         listOfNumbers.add(element);
         //when
@@ -304,7 +305,7 @@ class ListBaseTest {
     @Test
     public void shouldSetElementAtSpecifiedPosition() {
         //given
-        List<Long> listOfNumbers = new ArrayList<>();
+        List<Long> listOfNumbers = createList();
         listOfNumbers.add(1L);
         listOfNumbers.add(2L);
         listOfNumbers.add(3L);
@@ -318,7 +319,7 @@ class ListBaseTest {
     @Test
     public void shouldAddElementAtSpecifiedPosition() {
         //given
-        List<Long> listOfNumbers = new ArrayList<>();
+        List<Long> listOfNumbers = createList();
         listOfNumbers.add(1L);
         listOfNumbers.add(2L);
         listOfNumbers.add(3L);
@@ -334,7 +335,7 @@ class ListBaseTest {
     @Test
     public void shouldRemoveElementAtSpecifiedPosition() {
         //given
-        List<Long> listOfNumbers = new ArrayList<>();
+        List<Long> listOfNumbers = createList();
         listOfNumbers.add(1L);
         listOfNumbers.add(2L);
         listOfNumbers.add(3L);
@@ -348,7 +349,7 @@ class ListBaseTest {
     @Test
     public void shouldReturnIndexAtFirstOccurrence() {
         //given
-        List<Long> listOfNumbers = new ArrayList<>();
+        List<Long> listOfNumbers = createList();
         listOfNumbers.add(1L);
         listOfNumbers.add(2L);
         listOfNumbers.add(3L);
@@ -363,7 +364,7 @@ class ListBaseTest {
     @Test
     public void shouldReturnLastIndexOccuarnce() {
         //given
-        List<Long> listOfNumbers = new ArrayList<>();
+        List<Long> listOfNumbers = createList();
         listOfNumbers.add(1L);
         listOfNumbers.add(2L);
         listOfNumbers.add(1L);
@@ -379,7 +380,7 @@ class ListBaseTest {
     @Test
     public void shouldReturnListIterator() {
         //given
-        List<Long> listOfNumbers = new ArrayList<>();
+        List<Long> listOfNumbers = createList();
         listOfNumbers.add(1L);
         listOfNumbers.add(2L);
         listOfNumbers.add(3L);
@@ -393,7 +394,7 @@ class ListBaseTest {
     @Test
     public void shouldReturnListIteratorAtSpecPosition() {
         //given
-        List<Long> listOfNumbers = new ArrayList<>();
+        List<Long> listOfNumbers = createList();
         listOfNumbers.add(1L);
         listOfNumbers.add(2L);
         listOfNumbers.add(3L);
@@ -407,7 +408,7 @@ class ListBaseTest {
     @Test
     public void shouldReturnSubListFromBaseList() {
         //given
-        List<Long> listOfNumbers = new ArrayList<>();
+        List<Long> listOfNumbers = createList();
         listOfNumbers.add(1L);
         listOfNumbers.add(2L);
         listOfNumbers.add(3L);
@@ -416,14 +417,13 @@ class ListBaseTest {
         List<Long> sublist = listOfNumbers.subList(1, 2);
         //then
         assertEquals(2L, sublist.get(0));
-        assertEquals(3L, sublist.get(1));
-        assertEquals(2, sublist.size());
+        assertEquals(1, sublist.size());
     }
 
     @Test
     public void shouldReflectChangesOnSubList() {
         //given
-        List<Long> listOfNumbers = new ArrayList<>();
+        List<Long> listOfNumbers = createList();
         listOfNumbers.add(1L);
         listOfNumbers.add(2L);
         listOfNumbers.add(3L);
