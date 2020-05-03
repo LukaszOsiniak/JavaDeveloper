@@ -22,34 +22,57 @@ public class MyOwnArrayList implements List<Long> {
 
     @Override
     public boolean isEmpty() {
+        if (array[0] == null) {
+            return true;
+        }
         return false;
     }
 
     @Override
     public boolean contains(Object o) {
+        for (int i = 0; i < array.length; i++) {
+            if (o != null && o.equals(array[i])) {
+                return true;
+            }
+        }
         return false;
     }
 
     @Override
     public Iterator<Long> iterator() {
-        return null;
+        return new MyOwnArrayListIterator(array);
     }
 
     @Override
     public Object[] toArray() {
-        return new Object[0];
+        Long[] newArray = new Long[size()];
+        for (int i = 0; i < newArray.length; i++) {
+            newArray[i] = array[i];
+        }
+        return newArray;
     }
 
     @Override
-    public <T> T[] toArray(T[] ts) {
-        return null;
+    public <T> T[] toArray(T[] providedArray) {
+        if (providedArray.length >= size()) {
+            for (int i = 0; i < size(); i++) {
+                providedArray[i] = (T) array[i];
+            }
+            return providedArray;
+        } else {
+            Long[] newArray = new Long[size()];
+            for (int i = 0; i < size(); i++) {
+                newArray[i] = (Long) array[i];
+            }
+            return (T[]) newArray;
+        }
     }
 
     @Override
     public boolean add(Long aLong) {
         for (int i = 0; i < array.length; i++) {
             if (array[i] == null) {
-                array[i]= aLong;
+                array[i] = aLong;
                 return true;
             }
         }
