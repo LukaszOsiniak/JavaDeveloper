@@ -2,6 +2,7 @@ package pl.coderstrust.myownarraylist;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
@@ -11,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public abstract class ListBaseTest {
 
     public abstract List<Long> createList();
-    
+
     @Test
     public void shouldReturnSizeZeroWhenEmpty() {
         //given
@@ -154,7 +155,7 @@ public abstract class ListBaseTest {
         listOfNumbers.add(1L);
         listOfNumbers.add(2L);
         listOfNumbers.add(3L);
-        List<Long> otherlistOfNumbers = createList();
+        List<Long> otherlistOfNumbers = new ArrayList<>();
         otherlistOfNumbers.add(2L);
         otherlistOfNumbers.add(3L);
         //when
@@ -170,7 +171,7 @@ public abstract class ListBaseTest {
         listOfNumbers.add(1L);
         listOfNumbers.add(2L);
         listOfNumbers.add(3L);
-        List<Long> otherlistOfNumbers = createList();
+        List<Long> otherlistOfNumbers = new ArrayList<>();
         otherlistOfNumbers.add(2L);
         otherlistOfNumbers.add(7L);
         //when
@@ -186,7 +187,7 @@ public abstract class ListBaseTest {
         listOfNumbers.add(1L);
         listOfNumbers.add(2L);
         listOfNumbers.add(3L);
-        List<Long> toBeAdded = createList();
+        List<Long> toBeAdded = new ArrayList<>();
         toBeAdded.add(2L);
         toBeAdded.add(7L);
         //when
@@ -205,7 +206,7 @@ public abstract class ListBaseTest {
         listOfNumbers.add(1L);
         listOfNumbers.add(2L);
         listOfNumbers.add(3L);
-        List<Long> toBeAddedAtGivenIndex = createList();
+        List<Long> toBeAddedAtGivenIndex = new ArrayList<>();
         toBeAddedAtGivenIndex.add(5L);
         toBeAddedAtGivenIndex.add(7L);
         //when
@@ -227,7 +228,7 @@ public abstract class ListBaseTest {
         listOfNumbers.add(1L);
         listOfNumbers.add(2L);
         listOfNumbers.add(3L);
-        List<Long> toBeRemoved = createList();
+        List<Long> toBeRemoved = new ArrayList<>();
         toBeRemoved.add(2L);
         toBeRemoved.add(3L);
         //when
@@ -245,7 +246,7 @@ public abstract class ListBaseTest {
         listOfNumbers.add(1L);
         listOfNumbers.add(2L);
         listOfNumbers.add(3L);
-        List<Long> toBeRemoved = createList();
+        List<Long> toBeRemoved = new ArrayList<>();
         toBeRemoved.add(2L);
         toBeRemoved.add(7L);
         //when
@@ -264,7 +265,7 @@ public abstract class ListBaseTest {
         listOfNumbers.add(1L);
         listOfNumbers.add(2L);
         listOfNumbers.add(3L);
-        List<Long> toBeRetained = createList();
+        List<Long> toBeRetained = new ArrayList<>();
         toBeRetained.add(2L);
         toBeRetained.add(3L);
         //when
@@ -319,7 +320,7 @@ public abstract class ListBaseTest {
     @Test
     public void shouldAddElementAtSpecifiedPosition() {
         //given
-        List<Long> listOfNumbers = createList();
+        List<Long> listOfNumbers = new ArrayList<>();
         listOfNumbers.add(1L);
         listOfNumbers.add(2L);
         listOfNumbers.add(3L);
@@ -418,20 +419,5 @@ public abstract class ListBaseTest {
         //then
         assertEquals(2L, sublist.get(0));
         assertEquals(1, sublist.size());
-    }
-
-    @Test
-    public void shouldReflectChangesOnSubList() {
-        //given
-        List<Long> listOfNumbers = createList();
-        listOfNumbers.add(1L);
-        listOfNumbers.add(2L);
-        listOfNumbers.add(3L);
-        listOfNumbers.add(4L);
-        //when
-        List<Long> sublist = listOfNumbers.subList(1, 2);
-        sublist.set(0, 10L);
-        //then
-        assertEquals(10L, listOfNumbers.get(1));
     }
 }
