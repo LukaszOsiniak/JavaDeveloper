@@ -7,9 +7,17 @@ import java.util.ListIterator;
 
 public class MyOwnArrayList implements List<Long> {
 
+    private Long[] array = new Long[5];
+
     @Override
     public int size() {
-        return 0;
+        int counter = 0;
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] != null) {
+                counter++;
+            }
+        }
+        return counter;
     }
 
     @Override
@@ -39,6 +47,12 @@ public class MyOwnArrayList implements List<Long> {
 
     @Override
     public boolean add(Long aLong) {
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] == null) {
+                array[i]= aLong;
+                return true;
+            }
+        }
         return false;
     }
 
