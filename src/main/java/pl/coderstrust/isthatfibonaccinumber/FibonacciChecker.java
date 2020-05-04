@@ -5,14 +5,14 @@ import java.util.Set;
 
 public class FibonacciChecker {
 
-    private static Set<Long> bankOfFibonacciNumbers = new HashSet<>();
+    private Set<Long> bankOfFibonacciNumbers = new HashSet<>();
     private static final int NB_OF_FIBONACCI_LONG_TYPE_RANGE = 93;
 
-    public static boolean isFibonacciNumber(long number) {
+    public boolean isFibonacciNumber(long number) {
         return bankOfFibonacciNumbers.contains(number);
     }
 
-    static {
+    public FibonacciChecker() {
         bankOfFibonacciNumbers.add(0L);
         bankOfFibonacciNumbers.add(1L);
         long temp = 0;
