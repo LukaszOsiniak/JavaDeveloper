@@ -2,8 +2,9 @@ package pl.coderstrust.numbersfromfile;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.List;
+
+import static pl.coderstrust.numbersfromfile.NumbersProcessor.isLineValid;
 
 public class Processor {
 
@@ -19,12 +20,8 @@ public class Processor {
         List<String> linesFromFile = fileProcessor.readLinesFromFile(fileName);
         List<String> resultLines = new ArrayList<>();
         for (String line : linesFromFile) {
-            if (!line.isEmpty()) {
-                try {
-                    resultLines.add(numbersProcessor.processLine(line));
-                } catch (InputMismatchException e) {
-                    //continue
-                }
+            if (!line.isEmpty() && isLineValid(line)) {
+                resultLines.add(numbersProcessor.processLine(line));
             }
         }
         fileProcessor.writeLinesToFile(resultLines, resultFileName);
