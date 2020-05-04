@@ -2,14 +2,14 @@ package pl.coderstrust.myownarraylist;
 
 import java.util.ListIterator;
 
-public class MyOwnArrayListIterator implements ListIterator {
+public class MyOwnArrayListIterator<T> implements ListIterator<T> {
 
-    private Long[] elements;
+    private Object[] elements;
     private int currentIndex;
 
-    public MyOwnArrayListIterator(int currentIndex, int size, Long[] array) {
+    public MyOwnArrayListIterator(int currentIndex, int size, T[] array) {
         this.currentIndex = currentIndex;
-        elements = new Long[size];
+        elements = new Object[size];
         for (int i = 0; i < size; i++) {
             elements[i] = array[i];
         }
@@ -24,8 +24,8 @@ public class MyOwnArrayListIterator implements ListIterator {
     }
 
     @Override
-    public Object next() {
-        return elements[currentIndex++];
+    public T next() {
+        return (T) elements[currentIndex++];
     }
 
     @Override
@@ -34,7 +34,7 @@ public class MyOwnArrayListIterator implements ListIterator {
     }
 
     @Override
-    public Object previous() {
+    public T previous() {
         return null;
     }
 

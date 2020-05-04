@@ -1,13 +1,11 @@
 package pl.coderstrust.myownarraylist;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
+import java.lang.reflect.Array;
+import java.util.*;
 
-public class MyOwnArrayList implements List<Long> {
+public class MyOwnArrayList<T> implements List<T> {
 
-    private Long[] array = new Long[100];
+    private Object[] array = new Object[100];
 
     @Override
     public int size() {
@@ -39,13 +37,13 @@ public class MyOwnArrayList implements List<Long> {
     }
 
     @Override
-    public Iterator<Long> iterator() {
+    public Iterator<T> iterator() {
         return new MyOwnArrayListIterator(0, size(), array);
     }
 
     @Override
     public Object[] toArray() {
-        Long[] newArray = new Long[size()];
+        Object[] newArray = new Object[size()];
         for (int i = 0; i < newArray.length; i++) {
             newArray[i] = array[i];
         }
@@ -53,23 +51,21 @@ public class MyOwnArrayList implements List<Long> {
     }
 
     @Override
-    public <T> T[] toArray(T[] providedArray) {
+    public <E> E[] toArray(E[] providedArray) {
         if (providedArray.length >= size()) {
-            for (int i = 0; i < size(); i++) {
-                providedArray[i] = (T) array[i];
-            }
+            System.arraycopy(array, 0, providedArray, 0, size());
             return providedArray;
         } else {
-            Long[] newArray = new Long[size()];
+            E[] newArray = (E[]) Array.newInstance(providedArray.getClass().getComponentType(), size());
             for (int i = 0; i < size(); i++) {
-                newArray[i] = array[i];
+                newArray[i] = (E) array[i];
             }
-            return (T[]) newArray;
+            return newArray;
         }
     }
 
     @Override
-    public boolean add(Long element) {
+    public boolean add(T element) {
         for (int i = 0; i < array.length; i++) {
             if (array[i] == null) {
                 array[i] = element;
@@ -107,8 +103,8 @@ public class MyOwnArrayList implements List<Long> {
     }
 
     @Override
-    public boolean addAll(Collection<? extends Long> collection) {
-        Iterator<Long> iterator = (Iterator<Long>) collection.iterator();
+    public boolean addAll(Collection<? extends T> collection) {
+        Iterator<T> iterator = (Iterator<T>) collection.iterator();
         int indexToPutElement = size();
         while (iterator.hasNext()) {
             array[indexToPutElement] = iterator.next();
@@ -118,11 +114,11 @@ public class MyOwnArrayList implements List<Long> {
     }
 
     @Override
-    public boolean addAll(int i, Collection<? extends Long> collection) {
+    public boolean addAll(int i, Collection<? extends T> collection) {
         for (int j = size() - 1; j >= i; j--) {
             array[j + collection.size()] = array[j];
         }
-        Iterator<Long> iterator = (Iterator<Long>) collection.iterator();
+        Iterator<T> iterator = (Iterator<T>) collection.iterator();
         int indexToPutElement = i;
         while (iterator.hasNext()) {
             array[indexToPutElement] = iterator.next();
@@ -146,7 +142,7 @@ public class MyOwnArrayList implements List<Long> {
     @Override
     public boolean retainAll(Collection<?> collection) {
         clear();
-        addAll((Collection<? extends Long>) collection);
+        addAll((Collection<? extends T>) collection);
         return true;
     }
 
@@ -158,19 +154,19 @@ public class MyOwnArrayList implements List<Long> {
     }
 
     @Override
-    public Long get(int index) {
-        return array[index];
+    public T get(int index) {
+        return (T) array[index];
     }
 
     @Override
-    public Long set(int index, Long element) {
-        Long temp = array[index];
+    public T set(int index, T element) {
+        Object temp = array[index];
         array[index] = element;
-        return temp;
+        return (T) temp;
     }
 
     @Override
-    public void add(int index, Long element) {
+    public void add(int index, T element) {
         for (int j = size() - 1; j >= index; j--) {
             array[index + 1] = array[index];
         }
@@ -178,12 +174,12 @@ public class MyOwnArrayList implements List<Long> {
     }
 
     @Override
-    public Long remove(int index) {
-        Long temp = array[index];
+    public T remove(int index) {
+        Object temp = array[index];
         for (int j = index; j < size(); j++) {
             array[index] = array[index + 1];
         }
-        return temp;
+        return (T) temp;
     }
 
     @Override
@@ -214,20 +210,20 @@ public class MyOwnArrayList implements List<Long> {
     }
 
     @Override
-    public ListIterator<Long> listIterator() {
+    public ListIterator<T> listIterator() {
         return new MyOwnArrayListIterator(0, size(), array);
     }
 
     @Override
-    public ListIterator<Long> listIterator(int index) {
+    public ListIterator<T> listIterator(int index) {
         return new MyOwnArrayListIterator(index, size(), array);
     }
 
     @Override
-    public List<Long> subList(int fromIndex, int toIndex) {
-        List<Long> subList = new MyOwnArrayList();
+    public List<T> subList(int fromIndex, int toIndex) {
+        List<T> subList = new MyOwnArrayList();
         for (int i = fromIndex; i < toIndex; i++) {
-            subList.add(array[i]);
+            subList.add((T) array[i]);
         }
         return subList;
     }
