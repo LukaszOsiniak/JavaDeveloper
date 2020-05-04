@@ -2,6 +2,7 @@ package pl.coderstrust.numbersfromfile;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 
 public class Processor {
@@ -21,7 +22,7 @@ public class Processor {
             if (!line.isEmpty()) {
                 try {
                     resultLines.add(numbersProcessor.processLine(line));
-                } catch (NumberFormatException e) {
+                } catch (InputMismatchException e) {
                     //continue
                 }
             }
