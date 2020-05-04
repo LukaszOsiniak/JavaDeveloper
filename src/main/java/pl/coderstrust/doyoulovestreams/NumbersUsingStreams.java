@@ -1,5 +1,7 @@
 package pl.coderstrust.doyoulovestreams;
 
+import pl.coderstrust.numbersfromfile.NumbersProcessor;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -11,17 +13,25 @@ import static java.nio.file.Files.write;
 
 public class NumbersUsingStreams {
 
-    public static void main(String[] args) throws IOException {
-        Stream<String> myStream = Files.lines(Paths.get("src\\main\\java\\pl\\coderstrust\\doyoulovestreams\\numbers.txt"));
-        myStream.filter(e -> NumbersProcessor.isLineValid(e))
-                .map(e -> Arrays.stream(e.split(" ")).reduce((str1, str2) -> str1 + "+" + str2).get()
-                        + "=" + Arrays.stream(e.split(" ")).mapToInt(p -> Integer.parseInt(p)).sum()
-                ).forEach(l -> {
-            try {
-                write(Paths.get("streamOutput.txt"), Arrays.asList(l), StandardOpenOption.APPEND);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
+    private static final String SPLIT_NUMBERS_REGEX = "\\s+";
+
+    public static void processNumbersFromFile(String inputFilePath, String outputFilePath) throws IOException {
+        Stream<String> myStream = Files.lines(Paths.get(inputFilePath));
+        try {
+            myStream.filter(line -> NumbersProcessor.isLineValid(line))
+                    .map(line -> Arrays.stream(line.split(SPLIT_NUMBERS_REGEX)).filter(str -> !str.isEmpty())
+                            .reduce((str1, str2) -> str1 + "+" + str2).get()
+                            + "=" + Arrays.stream(line.split(SPLIT_NUMBERS_REGEX)).filter(str -> !str.isEmpty())
+                            .mapToInt(numberStr -> Integer.parseInt(numberStr)).sum()
+                    ).forEach(line -> {
+                try {
+                    write(Paths.get(outputFilePath), Arrays.asList(line), StandardOpenOption.APPEND, StandardOpenOption.CREATE);
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
+            });
+        } finally {
+            myStream.close();
+        }
     }
 }
