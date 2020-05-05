@@ -16,7 +16,6 @@ public class FibonacciCheckerTest {
 
     @Test
     public void shouldReturnTrueForFibonacciNumber() throws IOException {
-        System.out.println(System.getProperty("user.dir"));
         //given
         FibonacciChecker fibonacciChecker = new FibonacciChecker();
         List<String> fibonacciNumbers = Files.readAllLines(Path.of("src/test/resources/fibonacciNumbers.txt"));
@@ -42,7 +41,7 @@ public class FibonacciCheckerTest {
     }
 
     public static List<Long> getListOfNotFibbonaciNumbers() throws IOException {
-        List<String> fibonacciNumbers = Files.readAllLines(Path.of("src\\test\\resources\\fibonacciNumbers.txt"));
+        List<String> fibonacciNumbers = Files.readAllLines(Path.of("src/test/resources/fibonacciNumbers.txt"));
         List<Long> nonFibonacci = new ArrayList<>();
         Random random = new Random();
         for (int i = 0; i < 1000000; i++) {
