@@ -19,7 +19,7 @@ public class FibonacciCheckerTest {
         System.out.println(System.getProperty("user.dir"));
         //given
         FibonacciChecker fibonacciChecker = new FibonacciChecker();
-        List<String> fibonacciNumbers = Files.readAllLines(Path.of("src\\test\\resources\\fibonacciNumbers.txt"));
+        List<String> fibonacciNumbers = Files.readAllLines(Path.of("src/test/resources/fibonacciNumbers.txt"));
         for (String number : fibonacciNumbers) {
             //when
             boolean isFibonacci = fibonacciChecker.isFibonacciNumber(Long.parseLong(number));
