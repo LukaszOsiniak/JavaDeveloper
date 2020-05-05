@@ -7,15 +7,21 @@ public class MyOwnArrayList<T> implements List<T> {
 
     private Object[] array = new Object[100];
 
-    @Override
-    public int size() {
+    private int arraySize;
+
+    private void recalculateArraySize() {
         int counter = 0;
         for (int i = 0; i < array.length; i++) {
             if (array[i] != null) {
                 counter++;
             }
         }
-        return counter;
+        arraySize = counter;
+    }
+
+    @Override
+    public int size() {
+        return arraySize;
     }
 
     @Override
@@ -27,9 +33,9 @@ public class MyOwnArrayList<T> implements List<T> {
     }
 
     @Override
-    public boolean contains(Object elements) {
+    public boolean contains(Object element) {
         for (int i = 0; i < array.length; i++) {
-            if (elements != null && elements.equals(array[i])) {
+            if (element != null && element.equals(array[i])) {
                 return true;
             }
         }
@@ -69,6 +75,7 @@ public class MyOwnArrayList<T> implements List<T> {
         for (int i = 0; i < array.length; i++) {
             if (array[i] == null) {
                 array[i] = element;
+                recalculateArraySize();
                 return true;
             }
         }
@@ -86,6 +93,7 @@ public class MyOwnArrayList<T> implements List<T> {
                 for (int j = i; j < array.length - 1; j++) {
                     array[j] = array[j + 1];
                 }
+                recalculateArraySize();
                 return true;
             }
         }
@@ -110,6 +118,7 @@ public class MyOwnArrayList<T> implements List<T> {
             array[indexToPutElement] = iterator.next();
             indexToPutElement++;
         }
+        recalculateArraySize();
         return true;
     }
 
@@ -124,6 +133,7 @@ public class MyOwnArrayList<T> implements List<T> {
             array[indexToPutElement] = iterator.next();
             indexToPutElement++;
         }
+        recalculateArraySize();
         return true;
     }
 
@@ -136,6 +146,7 @@ public class MyOwnArrayList<T> implements List<T> {
                 changed = true;
             }
         }
+        recalculateArraySize();
         return changed;
     }
 
@@ -143,6 +154,7 @@ public class MyOwnArrayList<T> implements List<T> {
     public boolean retainAll(Collection<?> collection) {
         clear();
         addAll((Collection<? extends T>) collection);
+        recalculateArraySize();
         return true;
     }
 
@@ -151,6 +163,7 @@ public class MyOwnArrayList<T> implements List<T> {
         for (int i = 0; i < array.length; i++) {
             array[i] = null;
         }
+        recalculateArraySize();
     }
 
     @Override
@@ -171,6 +184,7 @@ public class MyOwnArrayList<T> implements List<T> {
             array[index + 1] = array[index];
         }
         array[index] = element;
+        recalculateArraySize();
     }
 
     @Override
@@ -179,6 +193,7 @@ public class MyOwnArrayList<T> implements List<T> {
         for (int j = index; j < size(); j++) {
             array[index] = array[index + 1];
         }
+        recalculateArraySize();
         return (T) temp;
     }
 
