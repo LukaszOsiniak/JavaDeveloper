@@ -7,7 +7,7 @@ public class MyOwnArrayListIterator<T> implements ListIterator<T> {
     private Object[] elements;
     private int currentIndex;
 
-    public MyOwnArrayListIterator(int currentIndex, int size, T[] array) {
+    public MyOwnArrayListIterator(int currentIndex, int size, Object[] array) {
         this.currentIndex = currentIndex;
         elements = new Object[size];
         for (int i = 0; i < size; i++) {
@@ -24,6 +24,7 @@ public class MyOwnArrayListIterator<T> implements ListIterator<T> {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public T next() {
         return (T) elements[currentIndex++];
     }

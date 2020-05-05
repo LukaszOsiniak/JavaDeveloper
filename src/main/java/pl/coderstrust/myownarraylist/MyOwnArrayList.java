@@ -34,7 +34,7 @@ public class MyOwnArrayList<T> implements List<T> {
 
     @Override
     public Iterator<T> iterator() {
-        return new MyOwnArrayListIterator(0, size(), array);
+        return new MyOwnArrayListIterator<T>(0, size(), array);
     }
 
     @Override
@@ -47,6 +47,7 @@ public class MyOwnArrayList<T> implements List<T> {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public <E> E[] toArray(E[] providedArray) {
         if (providedArray.length >= arraySize) {
             System.arraycopy(array, 0, providedArray, 0, arraySize);
@@ -89,6 +90,7 @@ public class MyOwnArrayList<T> implements List<T> {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public boolean addAll(Collection<? extends T> collection) {
         Iterator<T> iterator = (Iterator<T>) collection.iterator();
         int indexToPutElement = arraySize;
@@ -101,6 +103,7 @@ public class MyOwnArrayList<T> implements List<T> {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public boolean addAll(int i, Collection<? extends T> collection) {
         for (int j = arraySize - 1; j >= i; j--) {
             array[j + collection.size()] = array[j];
@@ -128,6 +131,7 @@ public class MyOwnArrayList<T> implements List<T> {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public boolean retainAll(Collection<?> collection) {
         clear();
         addAll((Collection<? extends T>) collection);
@@ -143,11 +147,13 @@ public class MyOwnArrayList<T> implements List<T> {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public T get(int index) {
         return (T) array[index];
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public T set(int index, T element) {
         Object temp = array[index];
         array[index] = element;
@@ -164,6 +170,7 @@ public class MyOwnArrayList<T> implements List<T> {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public T remove(int index) {
         Object temp = array[index];
         for (int j = index; j < size(); j++) {
@@ -201,16 +208,19 @@ public class MyOwnArrayList<T> implements List<T> {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public ListIterator<T> listIterator() {
         return new MyOwnArrayListIterator(0, arraySize, array);
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public ListIterator<T> listIterator(int index) {
         return new MyOwnArrayListIterator(index, arraySize, array);
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public List<T> subList(int fromIndex, int toIndex) {
         List<T> subList = new MyOwnArrayList();
         for (int i = fromIndex; i < toIndex; i++) {
