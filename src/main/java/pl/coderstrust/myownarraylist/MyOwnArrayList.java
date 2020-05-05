@@ -1,23 +1,16 @@
 package pl.coderstrust.myownarraylist;
 
-import java.lang.reflect.Array;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
 
 public class MyOwnArrayList<T> implements List<T> {
 
-    private Object[] array = new Object[100];
+    private Object[] array = new Object[10];
 
     private int arraySize;
-
-    private void recalculateArraySize() {
-        int counter = 0;
-        for (int i = 0; i < array.length; i++) {
-            if (array[i] != null) {
-                counter++;
-            }
-        }
-        arraySize = counter;
-    }
 
     @Override
     public int size() {
@@ -26,15 +19,12 @@ public class MyOwnArrayList<T> implements List<T> {
 
     @Override
     public boolean isEmpty() {
-        if (array[0] == null) {
-            return true;
-        }
-        return false;
+        return arraySize == 0;
     }
 
     @Override
     public boolean contains(Object element) {
-        for (int i = 0; i < array.length; i++) {
+        for (int i = 0; i < arraySize; i++) {
             if (element != null && element.equals(array[i])) {
                 return true;
             }
@@ -49,7 +39,7 @@ public class MyOwnArrayList<T> implements List<T> {
 
     @Override
     public Object[] toArray() {
-        Object[] newArray = new Object[size()];
+        Object[] newArray = new Object[arraySize];
         for (int i = 0; i < newArray.length; i++) {
             newArray[i] = array[i];
         }
@@ -58,42 +48,30 @@ public class MyOwnArrayList<T> implements List<T> {
 
     @Override
     public <E> E[] toArray(E[] providedArray) {
-        if (providedArray.length >= size()) {
-            System.arraycopy(array, 0, providedArray, 0, size());
+        if (providedArray.length >= arraySize) {
+            System.arraycopy(array, 0, providedArray, 0, arraySize);
+            Arrays.fill(providedArray, arraySize, providedArray.length, null);
             return providedArray;
-        } else {
-            E[] newArray = (E[]) Array.newInstance(providedArray.getClass().getComponentType(), size());
-            for (int i = 0; i < size(); i++) {
-                newArray[i] = (E) array[i];
-            }
-            return newArray;
         }
+        return (E[]) Arrays.copyOfRange(array, 0, arraySize, providedArray.getClass());
     }
 
     @Override
     public boolean add(T element) {
-        for (int i = 0; i < array.length; i++) {
-            if (array[i] == null) {
-                array[i] = element;
-                recalculateArraySize();
-                return true;
-            }
-        }
-        return false;
+        array[arraySize] = element;
+        arraySize++;
+        return true;
     }
 
     @Override
     public boolean remove(Object objToRemove) {
-        if (objToRemove == null) {
-            return false;
-        }
-        for (int i = 0; i < array.length; i++) {
+        for (int i = 0; i < arraySize; i++) {
             if (objToRemove.equals(array[i])) {
                 array[i] = null;
-                for (int j = i; j < array.length - 1; j++) {
+                for (int j = i; j < arraySize - 1; j++) {
                     array[j] = array[j + 1];
                 }
-                recalculateArraySize();
+                arraySize--;
                 return true;
             }
         }
@@ -113,18 +91,18 @@ public class MyOwnArrayList<T> implements List<T> {
     @Override
     public boolean addAll(Collection<? extends T> collection) {
         Iterator<T> iterator = (Iterator<T>) collection.iterator();
-        int indexToPutElement = size();
+        int indexToPutElement = arraySize;
         while (iterator.hasNext()) {
             array[indexToPutElement] = iterator.next();
             indexToPutElement++;
+            arraySize++;
         }
-        recalculateArraySize();
         return true;
     }
 
     @Override
     public boolean addAll(int i, Collection<? extends T> collection) {
-        for (int j = size() - 1; j >= i; j--) {
+        for (int j = arraySize - 1; j >= i; j--) {
             array[j + collection.size()] = array[j];
         }
         Iterator<T> iterator = (Iterator<T>) collection.iterator();
@@ -132,8 +110,8 @@ public class MyOwnArrayList<T> implements List<T> {
         while (iterator.hasNext()) {
             array[indexToPutElement] = iterator.next();
             indexToPutElement++;
+            arraySize++;
         }
-        recalculateArraySize();
         return true;
     }
 
@@ -146,7 +124,6 @@ public class MyOwnArrayList<T> implements List<T> {
                 changed = true;
             }
         }
-        recalculateArraySize();
         return changed;
     }
 
@@ -154,16 +131,15 @@ public class MyOwnArrayList<T> implements List<T> {
     public boolean retainAll(Collection<?> collection) {
         clear();
         addAll((Collection<? extends T>) collection);
-        recalculateArraySize();
         return true;
     }
 
     @Override
     public void clear() {
-        for (int i = 0; i < array.length; i++) {
+        for (int i = 0; i < arraySize; i++) {
             array[i] = null;
         }
-        recalculateArraySize();
+        arraySize=0;
     }
 
     @Override
@@ -180,11 +156,11 @@ public class MyOwnArrayList<T> implements List<T> {
 
     @Override
     public void add(int index, T element) {
-        for (int j = size() - 1; j >= index; j--) {
+        for (int j = arraySize - 1; j >= index; j--) {
             array[index + 1] = array[index];
         }
         array[index] = element;
-        recalculateArraySize();
+        arraySize++;
     }
 
     @Override
@@ -193,7 +169,7 @@ public class MyOwnArrayList<T> implements List<T> {
         for (int j = index; j < size(); j++) {
             array[index] = array[index + 1];
         }
-        recalculateArraySize();
+        arraySize--;
         return (T) temp;
     }
 
@@ -202,7 +178,7 @@ public class MyOwnArrayList<T> implements List<T> {
         if (element == null) {
             return -1;
         }
-        for (int i = 0; i < array.length; i++) {
+        for (int i = 0; i < arraySize; i++) {
             if (element.equals(array[i])) {
                 return i;
             }
@@ -215,23 +191,23 @@ public class MyOwnArrayList<T> implements List<T> {
         if (element == null) {
             return -1;
         }
-        int lastInedex = -1;
-        for (int i = 0; i < array.length; i++) {
+        int lastIndex = -1;
+        for (int i = 0; i < arraySize; i++) {
             if (element.equals(array[i])) {
-                lastInedex = i;
+                lastIndex = i;
             }
         }
-        return lastInedex;
+        return lastIndex;
     }
 
     @Override
     public ListIterator<T> listIterator() {
-        return new MyOwnArrayListIterator(0, size(), array);
+        return new MyOwnArrayListIterator(0, arraySize, array);
     }
 
     @Override
     public ListIterator<T> listIterator(int index) {
-        return new MyOwnArrayListIterator(index, size(), array);
+        return new MyOwnArrayListIterator(index, arraySize, array);
     }
 
     @Override
