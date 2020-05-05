@@ -16,6 +16,7 @@ public class FibonacciCheckerTest {
 
     @Test
     public void shouldReturnTrueForFibonacciNumber() throws IOException {
+        System.out.println(System.getProperty("user.dir"));
         //given
         FibonacciChecker fibonacciChecker = new FibonacciChecker();
         List<String> fibonacciNumbers = Files.readAllLines(Path.of("src\\test\\resources\\fibonacciNumbers.txt"));
