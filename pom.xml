@@ -42,7 +42,7 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.22.2</version>
                 <configuration>
-                    <argLine>-Xss5m</argLine>
+                    <argLine>-Xss25m</argLine>
                 </configuration>
             </plugin>
             <plugin>
