@@ -208,21 +208,18 @@ public class MyOwnArrayList<T> implements List<T> {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public ListIterator<T> listIterator() {
-        return new MyOwnArrayListIterator(0, arraySize, array);
+        return new MyOwnArrayListIterator<T>(0, arraySize, array);
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public ListIterator<T> listIterator(int index) {
-        return new MyOwnArrayListIterator(index, arraySize, array);
+        return new MyOwnArrayListIterator<T>(index, arraySize, array);
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public List<T> subList(int fromIndex, int toIndex) {
-        List<T> subList = new MyOwnArrayList();
+        List<T> subList = new MyOwnArrayList<T>();
         for (int i = fromIndex; i < toIndex; i++) {
             subList.add((T) array[i]);
         }
