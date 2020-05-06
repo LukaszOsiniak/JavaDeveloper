@@ -18,7 +18,7 @@ public class QuickSort implements SortingMethod {
     }
 
     public int partition(int[] arr, int low, int high) {
-        int pivot = arr[low];
+        int pivot = arr[(high + low) / 2];
         int i = low - 1;
         int j = high + 1;
 
