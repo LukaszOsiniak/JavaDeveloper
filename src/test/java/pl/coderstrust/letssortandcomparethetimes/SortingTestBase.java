@@ -64,8 +64,8 @@ public abstract class SortingTestBase {
                 arguments(new int[]{54, 32, 78, 1}, new int[]{1, 32, 54, 78}),
                 arguments(new int[]{-56, 123, 100, 39, 66, 12, -7}, new int[]{-56, -7, 12, 39, 66, 100, 123}),
                 arguments(oneThousand, sortedOneThousand),
-                arguments(oneHundredThousands, sortedOneHundredThousand),
-                arguments(oneMillion, sortedOneMillion)
+                arguments(oneHundredThousands, sortedOneHundredThousand)
+                //arguments(oneMillion, sortedOneMillion)
         );
     }
 }
