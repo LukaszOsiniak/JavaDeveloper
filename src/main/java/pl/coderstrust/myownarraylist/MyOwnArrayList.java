@@ -114,9 +114,8 @@ public class MyOwnArrayList<T> implements List<T> {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public boolean addAll(Collection<? extends T> collection) {
-        Iterator<T> iterator = (Iterator<T>) collection.iterator();
+        @SuppressWarnings("unchecked") Iterator<T> iterator = (Iterator<T>) collection.iterator();
         int indexToPutElement = arraySize;
         while (iterator.hasNext()) {
             array[indexToPutElement] = iterator.next();
@@ -127,12 +126,11 @@ public class MyOwnArrayList<T> implements List<T> {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public boolean addAll(int i, Collection<? extends T> collection) {
         for (int j = arraySize - 1; j >= i; j--) {
             array[j + collection.size()] = array[j];
         }
-        Iterator<T> iterator = (Iterator<T>) collection.iterator();
+        @SuppressWarnings("unchecked") Iterator<T> iterator = (Iterator<T>) collection.iterator();
         int indexToPutElement = i;
         while (iterator.hasNext()) {
             array[indexToPutElement] = iterator.next();
@@ -155,10 +153,10 @@ public class MyOwnArrayList<T> implements List<T> {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public boolean retainAll(Collection<?> collection) {
         clear();
-        addAll((Collection<? extends T>) collection);
+        @SuppressWarnings("unchecked") Collection<? extends T> collectionOfNewType = (Collection<? extends T>) collection;
+        addAll(collectionOfNewType);
         return true;
     }
 
@@ -171,17 +169,17 @@ public class MyOwnArrayList<T> implements List<T> {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public T get(int index) {
-        return (T) array[index];
+        @SuppressWarnings("unchecked") T element = (T) array[index];
+        return element;
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public T set(int index, T element) {
         Object temp = array[index];
         array[index] = element;
-        return (T) temp;
+        @SuppressWarnings("unchecked") T tempOfGivenType = (T) temp;
+        return tempOfGivenType;
     }
 
     @Override
@@ -194,14 +192,14 @@ public class MyOwnArrayList<T> implements List<T> {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public T remove(int index) {
         Object temp = array[index];
         for (int j = index; j < size(); j++) {
             array[index] = array[index + 1];
         }
         arraySize--;
-        return (T) temp;
+        @SuppressWarnings("unchecked") T tempOfGivenType = (T) temp;
+        return tempOfGivenType;
     }
 
     @Override

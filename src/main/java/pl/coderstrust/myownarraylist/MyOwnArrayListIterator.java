@@ -24,9 +24,9 @@ public class MyOwnArrayListIterator<T> implements ListIterator<T> {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public T next() {
-        return (T) elements[currentIndex++];
+        @SuppressWarnings("unchecked") T nextElement = (T) elements[currentIndex++];
+        return nextElement;
     }
 
     @Override

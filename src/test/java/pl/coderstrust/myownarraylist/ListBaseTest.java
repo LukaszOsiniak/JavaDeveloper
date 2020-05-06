@@ -113,14 +113,13 @@ public abstract class ListBaseTest<E> {
     }
 
     @Test
-    @SuppressWarnings("unchecked")
     public void shouldReturnCorrectArrayOfType() {
         //given
         List<E> listOfNumbers = createList();
         listOfNumbers.add(wrap(1L));
         listOfNumbers.add(wrap(2L));
         //when
-        E[] array = (E[]) listOfNumbers.toArray(new Object[0]);
+        @SuppressWarnings("unchecked") E[] array = (E[]) listOfNumbers.toArray(new Object[0]);
         //then
         assertEquals(2, array.length);
         genericAssertEquals(1L, array[0]);
