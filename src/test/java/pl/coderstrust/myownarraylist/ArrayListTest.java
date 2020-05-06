@@ -18,7 +18,7 @@ public class ArrayListTest extends ListBaseTest<Long> {
     }
 
     @Override
-    protected void genericAssertEquals(Object expected, Long actual) {
-        assertEquals(expected, actual);
+    protected void genericAssertEquals(Object expected, Object actual) {
+        assertEquals(expected, (Long) actual);
     }
 }

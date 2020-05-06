@@ -15,7 +15,7 @@ public abstract class ListBaseTest<E> {
 
     protected abstract E wrap(Long number);
 
-    protected abstract void genericAssertEquals(Object expected, E actual);
+    protected abstract void genericAssertEquals(Object expected, Object actual);
 
     @Test
     public void shouldReturnSizeZeroWhenEmpty() {
@@ -108,11 +108,12 @@ public abstract class ListBaseTest<E> {
         Object[] array = listOfNumbers.toArray();
         //then
         assertEquals(2, array.length);
-        genericAssertEquals(1L, (E) array[0]);
-        genericAssertEquals(2L, (E) array[1]);
+        genericAssertEquals(1L, array[0]);
+        genericAssertEquals(2L, array[1]);
     }
 
     @Test
+    @SuppressWarnings("unchecked")
     public void shouldReturnCorrectArrayOfType() {
         //given
         List<E> listOfNumbers = createList();

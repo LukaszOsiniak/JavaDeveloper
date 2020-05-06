@@ -17,7 +17,7 @@ public class MyOwnArrayListForStringTest extends ListBaseTest<String> {
     }
 
     @Override
-    protected void genericAssertEquals(Object expected, String actual) {
-        assertEquals(expected.toString(), actual);
+    protected void genericAssertEquals(Object expected, Object actual) {
+        assertEquals(expected.toString(), (String) actual);
     }
 }

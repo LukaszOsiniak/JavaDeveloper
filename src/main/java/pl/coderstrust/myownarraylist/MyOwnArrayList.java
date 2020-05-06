@@ -12,6 +12,14 @@ public class MyOwnArrayList<T> implements List<T> {
 
     private int arraySize;
 
+    public MyOwnArrayList() {
+    }
+
+    private MyOwnArrayList(Object[] fromArray) {
+        System.arraycopy(fromArray, 0, array, 0, fromArray.length);
+        this.arraySize = fromArray.length;
+    }
+
     @Override
     public int size() {
         return arraySize;
@@ -143,7 +151,7 @@ public class MyOwnArrayList<T> implements List<T> {
         for (int i = 0; i < arraySize; i++) {
             array[i] = null;
         }
-        arraySize=0;
+        arraySize = 0;
     }
 
     @Override
@@ -219,10 +227,7 @@ public class MyOwnArrayList<T> implements List<T> {
 
     @Override
     public List<T> subList(int fromIndex, int toIndex) {
-        List<T> subList = new MyOwnArrayList<T>();
-        for (int i = fromIndex; i < toIndex; i++) {
-            subList.add((T) array[i]);
-        }
-        return subList;
+        Object[] subArray = Arrays.copyOfRange(array, fromIndex, toIndex);
+        return new MyOwnArrayList<>(subArray);
     }
 }
