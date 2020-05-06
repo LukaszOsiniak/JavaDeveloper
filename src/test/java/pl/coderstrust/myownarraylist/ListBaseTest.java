@@ -40,6 +40,20 @@ public abstract class ListBaseTest<E> {
     }
 
     @Test
+    public void shouldReturnCorrectSizeWhenAddedMoreElementsThanInitialCapacity() {
+        //given
+        List<E> listOfNumbers = createList();
+        for (long i = 0; i < 15; i++) {
+            listOfNumbers.add(wrap(i));
+        }
+        //when
+        int size = listOfNumbers.size();
+        //then
+        assertEquals(15, size);
+        genericAssertEquals(13L, listOfNumbers.get(13));
+    }
+
+    @Test
     public void shouldReturnTrueWhenEmpty() {
         //given
         List<E> listOfNumbers = createList();
