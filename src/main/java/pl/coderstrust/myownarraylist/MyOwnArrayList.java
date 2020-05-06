@@ -8,14 +8,19 @@ import java.util.ListIterator;
 
 public class MyOwnArrayList<T> implements List<T> {
 
-    private Object[] array = new Object[10];
+    private static final int NUMBER_OF_ELEMENTS_IN_ARRAY = 10;
+
+    private Object[] array;
 
     private int arraySize;
 
     public MyOwnArrayList() {
+        array = new Object[NUMBER_OF_ELEMENTS_IN_ARRAY];
+        arraySize = 0;
     }
 
     private MyOwnArrayList(Object[] fromArray) {
+        array = new Object[NUMBER_OF_ELEMENTS_IN_ARRAY];
         System.arraycopy(fromArray, 0, array, 0, fromArray.length);
         this.arraySize = fromArray.length;
     }
@@ -55,14 +60,14 @@ public class MyOwnArrayList<T> implements List<T> {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public <E> E[] toArray(E[] providedArray) {
         if (providedArray.length >= arraySize) {
             System.arraycopy(array, 0, providedArray, 0, arraySize);
             Arrays.fill(providedArray, arraySize, providedArray.length, null);
             return providedArray;
         }
-        return (E[]) Arrays.copyOfRange(array, 0, arraySize, providedArray.getClass());
+        @SuppressWarnings("unchecked") E[] newArray = (E[]) Arrays.copyOfRange(array, 0, arraySize, providedArray.getClass());
+        return newArray;
     }
 
     @Override
@@ -74,15 +79,26 @@ public class MyOwnArrayList<T> implements List<T> {
 
     @Override
     public boolean remove(Object objToRemove) {
-        for (int i = 0; i < arraySize; i++) {
-            if (objToRemove.equals(array[i])) {
-                array[i] = null;
-                for (int j = i; j < arraySize - 1; j++) {
-                    array[j] = array[j + 1];
+        int foundIndex = -1;
+        if (objToRemove == null) {
+            for (int i = 0; i < arraySize; i++) {
+                if (array[i] == null) {
+                    foundIndex = i;
+                    break;
                 }
-                arraySize--;
-                return true;
             }
+        } else {
+            for (int i = 0; i < arraySize; i++) {
+                if (objToRemove.equals(array[i])) {
+                    foundIndex = i;
+                    break;
+                }
+            }
+        }
+        if (foundIndex != -1) {
+            System.arraycopy(array, foundIndex + 1, array, foundIndex, arraySize - foundIndex);
+            arraySize--;
+            return true;
         }
         return false;
     }
