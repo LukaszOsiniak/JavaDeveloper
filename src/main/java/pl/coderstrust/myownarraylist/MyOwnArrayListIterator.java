@@ -1,26 +1,24 @@
 package pl.coderstrust.myownarraylist;
 
+import jdk.jshell.spi.ExecutionControl;
+
 import java.util.ListIterator;
 
 public class MyOwnArrayListIterator<T> implements ListIterator<T> {
 
     private Object[] elements;
     private int currentIndex;
+    private int numberOfElements;
 
-    public MyOwnArrayListIterator(int currentIndex, int size, Object[] array) {
+    public MyOwnArrayListIterator(int currentIndex, int numberOfElements, Object[] array) {
         this.currentIndex = currentIndex;
-        elements = new Object[size];
-        for (int i = 0; i < size; i++) {
-            elements[i] = array[i];
-        }
+        this.numberOfElements = numberOfElements;
+        elements = array;
     }
 
     @Override
     public boolean hasNext() {
-        if (currentIndex < elements.length && elements[currentIndex] == null) {
-            return true;
-        }
-        return false;
+        return currentIndex < numberOfElements;
     }
 
     @Override
@@ -41,29 +39,30 @@ public class MyOwnArrayListIterator<T> implements ListIterator<T> {
 
     @Override
     public int nextIndex() {
-        if (currentIndex >= elements.length) {
-            return currentIndex;
-        }
         return currentIndex;
     }
 
     @Override
     public int previousIndex() {
-        return 0;
+        if(currentIndex==0){
+            return -1;
+        } else {
+            return currentIndex-1;
+        }
     }
 
     @Override
     public void remove() {
-
+        throw new UnsupportedOperationException("Not yet implemented");
     }
 
     @Override
     public void set(Object o) {
-
+        throw new UnsupportedOperationException("Not yet implemented");
     }
 
     @Override
     public void add(Object o) {
-
+        throw new UnsupportedOperationException("Not yet implemented");
     }
 }

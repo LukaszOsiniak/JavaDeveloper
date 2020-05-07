@@ -1,10 +1,6 @@
 package pl.coderstrust.myownarraylist;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
+import java.util.*;
 
 public class MyOwnArrayList<T> implements List<T> {
 
@@ -63,6 +59,9 @@ public class MyOwnArrayList<T> implements List<T> {
 
     @Override
     public <E> E[] toArray(E[] providedArray) {
+        if (providedArray == null) {
+            return null;
+        }
         if (providedArray.length >= arraySize) {
             System.arraycopy(array, 0, providedArray, 0, arraySize);
             Arrays.fill(providedArray, arraySize, providedArray.length, null);
@@ -130,6 +129,9 @@ public class MyOwnArrayList<T> implements List<T> {
 
     @Override
     public boolean containsAll(Collection<?> collection) {
+        if (collection == null) {
+            return false;
+        }
         for (Object element : collection) {
             if (!contains(element)) {
                 return false;
@@ -140,6 +142,9 @@ public class MyOwnArrayList<T> implements List<T> {
 
     @Override
     public boolean addAll(Collection<? extends T> collection) {
+        if (collection == null) {
+            return false;
+        }
         extendSizeIfNeeded(collection.size());
         Iterator<? extends T> iterator = collection.iterator();
         int indexToPutElement = arraySize;
@@ -153,6 +158,9 @@ public class MyOwnArrayList<T> implements List<T> {
 
     @Override
     public boolean addAll(int i, Collection<? extends T> collection) {
+        if (collection == null) {
+            return false;
+        }
         extendSizeIfNeeded(collection.size());
         for (int j = arraySize - 1; j >= i; j--) {
             array[j + collection.size()] = array[j];
@@ -170,17 +178,38 @@ public class MyOwnArrayList<T> implements List<T> {
     @Override
     public boolean removeAll(Collection<?> collection) {
         boolean changed = false;
-        for (Object element : collection) {
-            boolean removedElement = remove(element);
-            if (removedElement) {
-                changed = true;
+        if (collection == null) {
+            return changed;
+        }
+        for (int j = 0; j < arraySize; j++) {
+            if (collection.contains(array[j])) {
+                break;
             }
+            if (j == arraySize - 1) {
+                return changed;
+            }
+        }
+        int reorderIndex = 0;
+        int i;
+        for (i = 0; i < arraySize; i++) {
+            if (!collection.contains(array[i])) {
+                array[reorderIndex] = array[i];
+                reorderIndex++;
+            }
+        }
+        if (reorderIndex != i) {
+            changed = true;
+            downSizeIfNeeded(arraySize - reorderIndex);
+            arraySize = reorderIndex;
         }
         return changed;
     }
 
     @Override
     public boolean retainAll(Collection<?> collection) {
+        if (collection == null) {
+            return false;
+        }
         clear();
         @SuppressWarnings("unchecked") Collection<? extends T> collectionOfNewType = (Collection<? extends T>) collection;
         addAll(collectionOfNewType);
@@ -231,10 +260,10 @@ public class MyOwnArrayList<T> implements List<T> {
 
     @Override
     public int indexOf(Object element) {
-        if (element == null) {
-            return -1;
-        }
         for (int i = 0; i < arraySize; i++) {
+            if(element==null && array[i]==null){
+                return i;
+            }
             if (element.equals(array[i])) {
                 return i;
             }
@@ -247,13 +276,12 @@ public class MyOwnArrayList<T> implements List<T> {
         if (element == null) {
             return -1;
         }
-        int lastIndex = -1;
-        for (int i = 0; i < arraySize; i++) {
+        for (int i = arraySize-1; i >= 0; i--) {
             if (element.equals(array[i])) {
-                lastIndex = i;
+                return i;
             }
         }
-        return lastIndex;
+        return -1;
     }
 
     @Override
