@@ -3,6 +3,7 @@ package pl.coderstrust.myownarraylist;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
@@ -138,6 +139,15 @@ public abstract class ListBaseTest<E> {
         assertEquals(2, array.length);
         genericAssertEquals(1L, array[0]);
         genericAssertEquals(2L, array[1]);
+    }
+
+    @Test
+    public void shouldThrowNullPointerExceptionOnToArrayMethod() {
+        //given
+        List<E> listOfNumbers = createList();
+        Object[] nullArray = null;
+        //when
+        assertThrows(NullPointerException.class, () -> listOfNumbers.toArray(nullArray));
     }
 
     @Test
@@ -293,6 +303,15 @@ public abstract class ListBaseTest<E> {
         genericAssertEquals(2L, listOfNumbers.get(0));
         genericAssertEquals(3L, listOfNumbers.get(1));
         assertEquals(2, listOfNumbers.size());
+    }
+
+    @Test
+    public void shouldThrowNullPointerExceptionOnRetainAllMethod() {
+        //given
+        List<E> listOfNumbers = createList();
+        Collection<E> collectionOfNulls = null;
+        //when
+        assertThrows(NullPointerException.class, () -> listOfNumbers.retainAll(collectionOfNulls));
     }
 
     @Test

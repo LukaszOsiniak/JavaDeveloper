@@ -1,6 +1,10 @@
 package pl.coderstrust.myownarraylist;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
 
 public class MyOwnArrayList<T> implements List<T> {
 
@@ -147,42 +151,41 @@ public class MyOwnArrayList<T> implements List<T> {
             return false;
         }
         extendSizeIfNeeded(collection.size());
-        for (int j = arraySize - 1; j >= i; j--) {
-            array[j + collection.size()] = array[j];
-        }
-        Iterator<? extends T> iterator = collection.iterator();
-        int indexToPutElement = i;
-        while (iterator.hasNext()) {
-            array[indexToPutElement] = iterator.next();
-            indexToPutElement++;
-        }
+        System.arraycopy(array, i, array, i + collection.size(), arraySize - i);
+        Object[] arrayToBeAdded = collection.toArray();
+        System.arraycopy(arrayToBeAdded, 0, array, i, arrayToBeAdded.length);
         arraySize += collection.size();
         return true;
     }
 
     @Override
     public boolean removeAll(Collection<?> collection) {
-        boolean changed = false;
-        if (collection == null) {
-            return changed;
+        if (collection == null || !checkIfToBeChangedOnRemoveAll(collection)) {
+            return false;
         }
+        return reorderIfNeededOnRemoveAll(collection);
+    }
+
+    private boolean checkIfToBeChangedOnRemoveAll(Collection<?> collection) {
         for (int j = 0; j < arraySize; j++) {
             if (collection.contains(array[j])) {
-                break;
-            }
-            if (j == arraySize - 1) {
-                return changed;
+                return true;
             }
         }
+        return false;
+    }
+
+    private boolean reorderIfNeededOnRemoveAll(Collection<?> collection) {
+        boolean changed = false;
         int reorderIndex = 0;
-        int i;
-        for (i = 0; i < arraySize; i++) {
-            if (!collection.contains(array[i])) {
-                array[reorderIndex] = array[i];
+        int lastCheckedIndex;
+        for (lastCheckedIndex = 0; lastCheckedIndex < arraySize; lastCheckedIndex++) {
+            if (!collection.contains(array[lastCheckedIndex])) {
+                array[reorderIndex] = array[lastCheckedIndex];
                 reorderIndex++;
             }
         }
-        if (reorderIndex != i) {
+        if (reorderIndex != lastCheckedIndex) {
             changed = true;
             downSizeIfNeeded(arraySize - reorderIndex);
             arraySize = reorderIndex;
@@ -193,7 +196,7 @@ public class MyOwnArrayList<T> implements List<T> {
     @Override
     public boolean retainAll(Collection<?> collection) {
         if (collection == null) {
-            return false;
+            throw new NullPointerException();
         }
         clear();
         @SuppressWarnings("unchecked") Collection<? extends T> collectionOfNewType = (Collection<? extends T>) collection;
