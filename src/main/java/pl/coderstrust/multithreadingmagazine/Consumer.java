@@ -1,32 +1,16 @@
 package pl.coderstrust.multithreadingmagazine;
 
-public class Consumer implements Runnable {
+import java.util.concurrent.BlockingQueue;
 
-    private static final int ONE_SECOND = 1000;
+public class Consumer extends ProducerConsumerBase {
 
-    boolean shouldUseSleep;
-    int numberOfSeconds;
-
-    public Consumer(boolean shouldUseSleep, int numberOfSeconds) {
-        this.shouldUseSleep = shouldUseSleep;
-        this.numberOfSeconds = numberOfSeconds;
+    public Consumer(int numberOfSeconds, BlockingQueue<Integer> queue) {
+        super(numberOfSeconds, queue);
     }
 
-    public void run() {
-        try {
-            while (true) {
-                if (Container.queue.peek() != null) {
-                    Integer elementTaken = Container.queue.take();
-                    System.out.println("Consumer " + Thread.currentThread().getId() + " took: " + elementTaken);
-                } else {
-                    System.out.println("Consumer " + Thread.currentThread().getId() + ": The container is empty");
-                }
-                if (shouldUseSleep) {
-                    Thread.sleep(ONE_SECOND);
-                }
-            }
-        } catch (InterruptedException exception) {
-            Thread.currentThread().interrupt();
-        }
+    @Override
+    public void processContainer() throws InterruptedException {
+        Integer elementTaken = queue.take();
+        System.out.println("Consumer " + Thread.currentThread().getId() + " took: " + elementTaken);
     }
 }
