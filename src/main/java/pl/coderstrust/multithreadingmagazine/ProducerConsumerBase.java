@@ -5,7 +5,6 @@ import java.util.concurrent.BlockingQueue;
 public abstract class ProducerConsumerBase implements Runnable {
 
     private static final int ONE_SECOND = 1000;
-
     private int numberOfSeconds;
     protected BlockingQueue<Integer> queue;
 
@@ -23,7 +22,7 @@ public abstract class ProducerConsumerBase implements Runnable {
                 Thread.sleep(ONE_SECOND * numberOfSeconds);
             }
         } catch (InterruptedException exception) {
-            Thread.currentThread().interrupt();
+            //stop running
         }
     }
 }
