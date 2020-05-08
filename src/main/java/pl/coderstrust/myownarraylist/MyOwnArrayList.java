@@ -60,7 +60,7 @@ public class MyOwnArrayList<T> implements List<T> {
     @Override
     public <E> E[] toArray(E[] providedArray) {
         if (providedArray == null) {
-            return null;
+            throw new NullPointerException();
         }
         if (providedArray.length >= arraySize) {
             System.arraycopy(array, 0, providedArray, 0, arraySize);
@@ -102,24 +102,9 @@ public class MyOwnArrayList<T> implements List<T> {
 
     @Override
     public boolean remove(Object objToRemove) {
-        int foundIndex = -1;
-        if (objToRemove == null) {
-            for (int i = 0; i < arraySize; i++) {
-                if (array[i] == null) {
-                    foundIndex = i;
-                    break;
-                }
-            }
-        } else {
-            for (int i = 0; i < arraySize; i++) {
-                if (objToRemove.equals(array[i])) {
-                    foundIndex = i;
-                    break;
-                }
-            }
-        }
-        if (foundIndex != -1) {
-            System.arraycopy(array, foundIndex + 1, array, foundIndex, arraySize - foundIndex);
+        int indexOf = indexOf(objToRemove);
+        if (indexOf != -1) {
+            System.arraycopy(array, indexOf + 1, array, indexOf, arraySize - indexOf);
             downSizeIfNeeded(1);
             arraySize--;
             return true;
@@ -261,7 +246,7 @@ public class MyOwnArrayList<T> implements List<T> {
     @Override
     public int indexOf(Object element) {
         for (int i = 0; i < arraySize; i++) {
-            if(element==null && array[i]==null){
+            if (element == null && array[i] == null) {
                 return i;
             }
             if (element.equals(array[i])) {
@@ -276,7 +261,7 @@ public class MyOwnArrayList<T> implements List<T> {
         if (element == null) {
             return -1;
         }
-        for (int i = arraySize-1; i >= 0; i--) {
+        for (int i = arraySize - 1; i >= 0; i--) {
             if (element.equals(array[i])) {
                 return i;
             }

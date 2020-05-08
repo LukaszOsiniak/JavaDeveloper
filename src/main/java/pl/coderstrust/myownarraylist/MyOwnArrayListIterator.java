@@ -1,7 +1,5 @@
 package pl.coderstrust.myownarraylist;
 
-import jdk.jshell.spi.ExecutionControl;
-
 import java.util.ListIterator;
 
 public class MyOwnArrayListIterator<T> implements ListIterator<T> {
