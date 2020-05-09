@@ -1,23 +1,25 @@
 package pl.coderstrust.multithreadingmagazine;
 
-import java.util.Random;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Producer extends ProducerConsumerBase {
+
+    private static final AtomicInteger COUNTER = new AtomicInteger();
 
     public Producer(int numberOfSeconds, BlockingQueue<Integer> queue) {
         super(numberOfSeconds, queue);
     }
 
+    private String getHeader() {
+        return "Producer [" + Thread.currentThread().getId() + "]";
+    }
+
     @Override
-    public void processContainer() {
-        Random random = new Random();
-        int element = random.nextInt();
-        boolean added = queue.offer(element);
-        if (added) {
-            System.out.println("Producer " + Thread.currentThread().getId() + " put: " + element);
-        } else {
-            System.out.println("Producer " + Thread.currentThread().getId() + ": The Container is full");
-        }
+    public void processContainer(BlockingQueue<Integer> queue) throws InterruptedException {
+        int element = COUNTER.incrementAndGet();
+        System.out.println(getHeader() + " is going to put: " + element);
+        queue.put(element);
+        System.out.println(getHeader() + " has put: " + element);
     }
 }

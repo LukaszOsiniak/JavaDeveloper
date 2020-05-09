@@ -8,9 +8,14 @@ public class Consumer extends ProducerConsumerBase {
         super(numberOfSeconds, queue);
     }
 
+    private String getHeader() {
+        return "Consumer [" + Thread.currentThread().getId() + "]";
+    }
+
     @Override
-    public void processContainer() throws InterruptedException {
+    public void processContainer(BlockingQueue<Integer> queue) throws InterruptedException {
+        System.out.println(getHeader() + " is going to get element from container");
         Integer elementTaken = queue.take();
-        System.out.println("Consumer " + Thread.currentThread().getId() + " took: " + elementTaken);
+        System.out.println(getHeader() + " took: " + elementTaken);
     }
 }

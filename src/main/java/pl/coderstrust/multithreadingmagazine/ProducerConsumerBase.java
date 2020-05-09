@@ -5,24 +5,25 @@ import java.util.concurrent.BlockingQueue;
 public abstract class ProducerConsumerBase implements Runnable {
 
     private static final int ONE_SECOND = 1000;
+
     private int numberOfSeconds;
-    protected BlockingQueue<Integer> queue;
+    private BlockingQueue<Integer> queue;
 
     public ProducerConsumerBase(int numberOfSeconds, BlockingQueue<Integer> queue) {
         this.numberOfSeconds = numberOfSeconds;
         this.queue = queue;
     }
 
-    public abstract void processContainer() throws InterruptedException;
+    public abstract void processContainer(BlockingQueue<Integer> queue) throws InterruptedException;
 
     public void run() {
         try {
             while (true) {
-                processContainer();
+                processContainer(queue);
                 Thread.sleep(ONE_SECOND * numberOfSeconds);
             }
         } catch (InterruptedException exception) {
-            //stop running
+            Thread.currentThread().interrupt();
         }
     }
 }
